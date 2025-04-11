@@ -4,24 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+// Migración para la tabla 'dades_salut'
+class CreateDadesSalutTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
-        Schema::create('dades_saluts', function (Blueprint $table) {
+        Schema::create('dades_salut', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('usuari_id')->constrained('usuaris')->onDelete('cascade');
+            $table->string('tipus_dada', 100);
+            $table->decimal('valor', 10, 2);
+            $table->string('unitats', 50);
+            $table->timestamp('data_registre');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('dades_saluts');
+        Schema::dropIfExists('dades_salut');
     }
-};
+}
