@@ -10,7 +10,13 @@ class UsuariController extends Controller
 {
     public function index()
     {
-        return response()->json(Usuari::all());
+        $usuaris = Usuari::all();
+        return view('usuaris.index', compact('usuaris'));
+    }
+
+    public function create()
+    {
+        return view('usuaris.create');
     }
 
     public function store(Request $request)
@@ -23,14 +29,21 @@ class UsuariController extends Controller
         ]);
 
         $request['pass'] = Hash::make($request['pass']);
-        $usuari = Usuari::create($request->all());
+        Usuari::create($request->all());
 
-        return response()->json($usuari, 201);
+        return redirect()->route('usuaris.index')->with('success', 'Usuario creado correctamente.');
     }
 
     public function show($id)
     {
-        return response()->json(Usuari::findOrFail($id));
+        $usuari = Usuari::findOrFail($id);
+        return view('usuaris.show', compact('usuari'));
+    }
+
+    public function edit($id)
+    {
+        $usuari = Usuari::findOrFail($id);
+        return view('usuaris.edit', compact('usuari'));
     }
 
     public function update(Request $request, $id)
@@ -52,12 +65,12 @@ class UsuariController extends Controller
 
         $usuari->update($request->all());
 
-        return response()->json($usuari);
+        return redirect()->route('usuaris.index')->with('success', 'Usuario actualizado correctamente.');
     }
 
     public function destroy($id)
     {
         Usuari::destroy($id);
-        return response()->json(null, 204);
+        return redirect()->route('usuaris.index')->with('success', 'Usuario eliminado correctamente.');
     }
 }
