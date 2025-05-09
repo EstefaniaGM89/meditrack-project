@@ -3,7 +3,7 @@
 @section('title', 'Crear Usuario')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-6">Crear Usuario</h2>
+    <h2 class="text-2xl font-bold mb-6">Crear Usuari</h2>
 
     @if ($errors->any())
         <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
@@ -18,7 +18,7 @@
     <form action="{{ route('usuaris.store') }}" method="POST" class="space-y-4 max-w-md">
         @csrf
         <div>
-            <label class="block font-semibold">Nombre</label>
+            <label class="block font-semibold">Nom</label>
             <input type="text" name="nom" class="w-full p-2 border rounded" required>
         </div>
 
@@ -28,12 +28,12 @@
         </div>
 
         <div>
-            <label class="block font-semibold">Contraseña</label>
+            <label class="block font-semibold">Contrasenya</label>
             <input type="password" name="pass" class="w-full p-2 border rounded" required>
         </div>
 
         <div>
-            <label class="block font-semibold">Fecha de Nacimiento</label>
+            <label class="block font-semibold">Data de naixement</label>
             <input type="date" name="data_naixement" class="w-full p-2 border rounded" required>
         </div>
 

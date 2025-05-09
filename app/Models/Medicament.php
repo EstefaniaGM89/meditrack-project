@@ -10,7 +10,7 @@ class Medicament extends Model
     use HasFactory;
 
     protected $table = 'medicaments';
-    protected $fillable = ['usuari_id', 'nom', 'dosi', 'hora', 'dia_setmana', 'inici', 'fi'];
+    protected $fillable = ['usuari_id', 'nom', 'descripcio', 'dosi', 'inici', 'fi'];
 
     public function usuari()
     {

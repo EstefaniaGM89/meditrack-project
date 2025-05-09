@@ -10,7 +10,7 @@ class Recordatori extends Model
     use HasFactory;
 
     protected $table = 'recordatoris';
-    protected $fillable = ['usuaris_id', 'medicaments_id', 'missatge', 'data_hora', 'estat'];
+    protected $fillable = ['usuaris_id', 'medicaments_id', 'missatge', 'data_hora', 'hora', 'dia_setmana', 'estat'];
 
     public function usuari()
     {
@@ -21,4 +21,8 @@ class Recordatori extends Model
     {
         return $this->belongsTo(Medicament::class, 'medicaments_id');
     }
+
+    protected $casts = [
+        'dies_setmana' => 'array',
+    ];
 }

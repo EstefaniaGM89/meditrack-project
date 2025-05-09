@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h2>Lista de Usuarios</h2>
-    <a href="{{ route('usuaris.create') }}" class="btn btn-primary mb-3">Nuevo Usuario</a>
+    <h2>LLista d'Usuaris</h2>
+    <a href="{{ route('usuaris.create') }}" class="btn btn-primary mb-3">Nou Usuari</a>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -13,10 +13,10 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
+                <th>Nom</th>
                 <th>Email</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Acciones</th>
+                <th>Data de naixement</th>
+                <th>Accions</th>
             </tr>
         </thead>
         <tbody>

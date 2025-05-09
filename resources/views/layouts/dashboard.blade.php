@@ -3,25 +3,25 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <h2 class="text-3xl font-bold mb-6">Bienvenida a MediTrack 👋</h2>
+    <h2 class="text-3xl font-bold mb-6">Benvingut/da a MediTrack 👋</h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="bg-white p-4 rounded shadow">
-            <h3 class="text-lg font-semibold">👥 Usuarios</h3>
-            <p class="text-gray-600">Gestión de usuarios registrados.</p>
-            <a href="{{ route('usuaris.index') }}" class="text-indigo-600 hover:underline mt-2 inline-block">Ver usuarios →</a>
+            <h3 class="text-lg font-semibold">👥 Usuaris</h3>
+            <p class="text-gray-600">Gestió d'usuaris registrats.</p>
+            <a href="{{ route('usuaris.index') }}" class="text-indigo-600 hover:underline mt-2 inline-block">Veure usuaris →</a>
         </div>
 
         <div class="bg-white p-4 rounded shadow">
-            <h3 class="text-lg font-semibold">💊 Medicamentos</h3>
-            <p class="text-gray-600">Listado y gestión de medicación.</p>
-            <a href="{{ route('medicaments.index') }}" class="text-indigo-600 hover:underline mt-2 inline-block">Ver medicamentos →</a>
+            <h3 class="text-lg font-semibold">💊 Medicaments</h3>
+            <p class="text-gray-600">Llistat i gestió de medicació.</p>
+            <a href="{{ route('medicaments.index') }}" class="text-indigo-600 hover:underline mt-2 inline-block">Veure medicaments →</a>
         </div>
 
         <div class="bg-white p-4 rounded shadow">
-            <h3 class="text-lg font-semibold">⏰ Recordatorios</h3>
-            <p class="text-gray-600">Configura alarmas para tomas.</p>
-            <a href="{{ route('recordatoris.index') }}" class="text-indigo-600 hover:underline mt-2 inline-block">Ver recordatorios →</a>
+            <h3 class="text-lg font-semibold">⏰ Recordatoris</h3>
+            <p class="text-gray-600">Configura les alarmes.</p>
+            <a href="{{ route('recordatoris.index') }}" class="text-indigo-600 hover:underline mt-2 inline-block">Veure recordatoris →</a>
         </div>
     </div>
 @endsection

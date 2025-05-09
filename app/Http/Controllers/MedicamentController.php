@@ -9,7 +9,13 @@ class MedicamentController extends Controller
 {
     public function index()
     {
-        return response()->json(Medicament::all());
+        $medicaments = Medicament::all();
+        return view('medicaments.index', compact('medicaments'));
+    }
+
+    public function create()
+    {
+        return view('medicaments.create');
     }
 
     public function store(Request $request)
@@ -18,34 +24,42 @@ class MedicamentController extends Controller
             'usuari_id' => 'required|exists:usuaris,id',
             'nom' => 'required|string|max:255',
             'descripcio' => 'nullable|string',
+            'dosi' => 'nullable|string|max:100',
+            'inici' => 'required|date',
+            'fi' => 'nullable|date',
         ]);
 
-        $medicament = Medicament::create($request->all());
-        return response()->json($medicament, 201);
+        Medicament::create($request->all());
+
+        return redirect()->route('medicaments.index')->with('success', 'Medicament creat correctament.');
     }
 
-    public function show($id)
+    public function edit($id)
     {
-        return response()->json(Medicament::findOrFail($id));
+        $medicament = Medicament::findOrFail($id);
+        return view('medicaments.edit', compact('medicament'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'usuari_id' => 'required|exists:usuaris,id',
+            'usuari_id' => 'sometimes|exists:usuaris,id',
             'nom' => 'required|string|max:255',
             'descripcio' => 'nullable|string',
+            'dosi' => 'nullable|string|max:100',
+            'inici' => 'required|date',
+            'fi' => 'nullable|date',
         ]);
 
         $medicament = Medicament::findOrFail($id);
         $medicament->update($request->all());
 
-        return response()->json($medicament);
+        return redirect()->route('medicaments.index')->with('success', 'Medicament actualitzat correctament.');
     }
 
     public function destroy($id)
     {
         Medicament::destroy($id);
-        return response()->json(null, 204);
+        return redirect()->route('medicaments.index')->with('success', 'Medicament eliminat correctament.');
     }
 }

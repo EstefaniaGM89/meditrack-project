@@ -20,7 +20,7 @@
         @method('PUT')
 
         {{-- Campo oculto para mantener el usuari_id si es necesario --}}
-        <input type="hidden" name="usuari_id" value="{{ $medicament->usuari_id }}">
+        <p class="text-sm text-gray-500">ID del Medicament: <strong>{{ $medicament->id }}</strong></p>
 
         <div>
             <label class="block font-semibold">Nom del Medicament</label>
@@ -36,11 +36,11 @@
             <label class="block font-semibold">Data d'inici</label>
             <input type="date" name="inici" value="{{ old('inici', $medicament->inici) }}" class="w-full p-2 border rounded" required>
         </div>
-
+        
         <div>
             <label class="block font-semibold">Data de fi</label>
             <input type="date" name="fi" value="{{ old('fi', $medicament->fi) }}" class="w-full p-2 border rounded">
-        </div>
+        </div>        
 
         <div class="flex gap-3 mt-4">
             <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Actualitzar</button>
