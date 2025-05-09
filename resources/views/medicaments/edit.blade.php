@@ -18,8 +18,7 @@
     <form action="{{ route('medicaments.update', $medicament->id) }}" method="POST" class="space-y-4 max-w-md">
         @csrf
         @method('PUT')
-
-        {{-- Campo oculto para mantener el usuari_id si es necesario --}}
+        
         <p class="text-sm text-gray-500">ID del Medicament: <strong>{{ $medicament->id }}</strong></p>
 
         <div>

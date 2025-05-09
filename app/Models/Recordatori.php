@@ -2,27 +2,41 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Recordatori extends Model
 {
     use HasFactory;
 
-    protected $table = 'recordatoris';
-    protected $fillable = ['usuaris_id', 'medicaments_id', 'missatge', 'data_hora', 'hora', 'dia_setmana', 'estat'];
+    protected $fillable = [
+        'pacient_id',
+        'medicaments_id',
+        'personal_sanitari_id',
+        'missatge',
+        'data_hora',
+        'hora',
+        'dies_setmana',
+        'estat',
+        'observacions',
+    ];
 
-    public function usuari()
+    protected $casts = [
+        'dies_setmana' => 'array',
+    ];
+
+    public function pacient()
     {
-        return $this->belongsTo(Usuari::class, 'usuaris_id');
+        return $this->belongsTo(Pacient::class);
+    }
+
+    public function personalSanitari()
+    {
+        return $this->belongsTo(PersonalSanitari::class);
     }
 
     public function medicament()
     {
         return $this->belongsTo(Medicament::class, 'medicaments_id');
     }
-
-    protected $casts = [
-        'dies_setmana' => 'array',
-    ];
 }

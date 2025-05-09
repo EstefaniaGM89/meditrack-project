@@ -19,8 +19,7 @@
         @csrf
         @method('PUT')
 
-        {{-- Campo oculto para mantener el usuari_id si es necesario --}}
-        <input type="hidden" name="usuari_id" value="{{ $medicament->usuari_id }}">
+        <input type="hidden" name="pacient_id" value="{{ $medicament->pacient_id }}">
 
         <div>
             <label class="block font-semibold">Nom del Medicament</label>

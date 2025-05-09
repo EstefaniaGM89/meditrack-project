@@ -20,8 +20,8 @@
         @method('PUT')
 
         <div>
-            <label class="block font-semibold">ID del Usuari</label>
-            <input type="number" name="usuaris_id" value="{{ old('usuaris_id', $recordatori->usuaris_id) }}" class="w-full p-2 border rounded" required>
+            <label class="block font-semibold">ID del Pacient</label>
+            <input type="number" name="pacients_id" value="{{ old('pacients_id', $recordatori->pacients_id) }}" class="w-full p-2 border rounded" required>
         </div>
 
         <div>

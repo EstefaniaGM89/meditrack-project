@@ -15,7 +15,7 @@ class DadesSalutController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'usuari_id' => 'required|exists:usuaris,id',
+            'pacient_id' => 'required|exists:pacients,id',
             'tipus_dada' => 'required|string|max:100',
             'valor' => 'required|numeric',
             'unitats' => 'required|string|max:50',
@@ -34,7 +34,7 @@ class DadesSalutController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'usuari_id' => 'required|exists:usuaris,id',
+            'pacient_id' => 'required|exists:pacients,id',
             'tipus_dada' => 'required|string|max:100',
             'valor' => 'required|numeric',
             'unitats' => 'required|string|max:50',

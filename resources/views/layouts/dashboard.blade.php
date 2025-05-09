@@ -9,7 +9,7 @@
         <div class="bg-white p-4 rounded shadow">
             <h3 class="text-lg font-semibold">👥 Usuaris</h3>
             <p class="text-gray-600">Gestió d'usuaris registrats.</p>
-            <a href="{{ route('usuaris.index') }}" class="text-indigo-600 hover:underline mt-2 inline-block">Veure usuaris →</a>
+            <a href="{{ route('pacients.index') }}" class="text-indigo-600 hover:underline mt-2 inline-block">Veure usuaris →</a>
         </div>
 
         <div class="bg-white p-4 rounded shadow">

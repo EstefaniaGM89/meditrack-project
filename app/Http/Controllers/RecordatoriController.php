@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Recordatori;
-use App\Models\Usuari;
+use App\Models\Pacient;
+use App\Models\Medicament;
 use App\Notifications\RecordatoriMedicament;
 
 class RecordatoriController extends Controller
@@ -17,20 +18,20 @@ class RecordatoriController extends Controller
 
     public function create()
     {
-        $usuaris = \App\Models\Usuari::all();
-        $medicaments = \App\Models\Medicament::all();
-        return view('recordatoris.create', compact('usuaris', 'medicaments'));
+        $pacients = Pacient::all();
+        $medicaments = Medicament::all();
+        return view('recordatoris.create', compact('pacients', 'medicaments'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'usuaris_id' => 'required|exists:usuaris,id',
+            'pacient_id'     => 'required|exists:pacients,id',
             'medicaments_id' => 'required|exists:medicaments,id',
-            'missatge' => 'required|string|max:255',
-            'data_hora' => 'nullable|date',
-            'hora' => 'nullable|date_format:H:i',
-            'dies_setmana' => 'nullable|array',
+            'missatge'       => 'required|string|max:255',
+            'data_hora'      => 'nullable|date',
+            'hora'           => 'nullable|date_format:H:i',
+            'dies_setmana'   => 'nullable|array',
             'dies_setmana.*' => 'in:Dilluns,Dimarts,Dimecres,Dijous,Divendres,Dissabte,Diumenge',
         ]);
 
@@ -40,9 +41,9 @@ class RecordatoriController extends Controller
 
         $recordatori = Recordatori::create($validated);
 
-        $usuari = Usuari::find($validated['usuaris_id']);
-        if ($usuari) {
-            $usuari->notify(new RecordatoriMedicament($recordatori));
+        $pacient = Pacient::find($validated['pacient_id']);
+        if ($pacient) {
+            $pacient->notify(new RecordatoriMedicament($recordatori));
         }
 
         return redirect()->route('recordatoris.index')->with('success', 'Recordatori creat correctament.');
@@ -57,18 +58,20 @@ class RecordatoriController extends Controller
     public function edit($id)
     {
         $recordatori = Recordatori::findOrFail($id);
-        return view('recordatoris.edit', compact('recordatori'));
+        $pacients = Pacient::all();
+        $medicaments = Medicament::all();
+        return view('recordatoris.edit', compact('recordatori', 'pacients', 'medicaments'));
     }
 
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'usuaris_id' => 'required|exists:usuaris,id',
+            'pacient_id'     => 'required|exists:pacients,id',
             'medicaments_id' => 'required|exists:medicaments,id',
-            'missatge' => 'required|string|max:255',
-            'data_hora' => 'nullable|date',
-            'hora' => 'nullable|date_format:H:i',
-            'dies_setmana' => 'nullable|array',
+            'missatge'       => 'required|string|max:255',
+            'data_hora'      => 'nullable|date',
+            'hora'           => 'nullable|date_format:H:i',
+            'dies_setmana'   => 'nullable|array',
             'dies_setmana.*' => 'in:Dilluns,Dimarts,Dimecres,Dijous,Divendres,Dissabte,Diumenge',
         ]);
 

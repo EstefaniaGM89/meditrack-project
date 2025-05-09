@@ -18,7 +18,7 @@
     <table class="table-auto w-full mt-6 bg-white shadow rounded">
         <thead class="bg-gray-200">
             <tr>
-                <th class="px-4 py-2">ID del Usuari</th>
+                <th class="px-4 py-2">ID del Pacient</th>
                 <th class="px-4 py-2">Nom del Medicament</th>
                 <th class="px-4 py-2">Missatge</th>
                 <th class="px-4 py-2">Data i Hora</th>
@@ -29,7 +29,7 @@
         <tbody>
             @forelse ($recordatoris as $recordatori)
                 <tr class="border-t">
-                    <td class="px-4 py-2">{{ $recordatori->usuaris_id }}</td>
+                    <td class="px-4 py-2">{{ $recordatori->pacients_id }}</td>
                     <td class="px-4 py-2">{{ $recordatori->medicaments_id }}</td>
                     <td class="px-4 py-2">{{ $recordatori->missatge }}</td>
                     <td class="px-4 py-2">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Medicament;
+use App\Models\Pacient;
 
 class MedicamentController extends Controller
 {
@@ -15,18 +16,19 @@ class MedicamentController extends Controller
 
     public function create()
     {
-        return view('medicaments.create');
+        $pacients = Pacient::all();
+        return view('medicaments.create', compact('pacients'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'usuari_id' => 'required|exists:usuaris,id',
-            'nom' => 'required|string|max:255',
-            'descripcio' => 'nullable|string',
-            'dosi' => 'nullable|string|max:100',
-            'inici' => 'required|date',
-            'fi' => 'nullable|date',
+            'pacient_id'  => 'required|exists:pacients,id',
+            'nom'         => 'required|string|max:255',
+            'descripcio'  => 'nullable|string',
+            'dosi'        => 'nullable|string|max:100',
+            'inici'       => 'required|date',
+            'fi'          => 'nullable|date',
         ]);
 
         Medicament::create($request->all());
@@ -37,18 +39,19 @@ class MedicamentController extends Controller
     public function edit($id)
     {
         $medicament = Medicament::findOrFail($id);
-        return view('medicaments.edit', compact('medicament'));
+        $pacients = Pacient::all();
+        return view('medicaments.edit', compact('medicament', 'pacients'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'usuari_id' => 'sometimes|exists:usuaris,id',
-            'nom' => 'required|string|max:255',
-            'descripcio' => 'nullable|string',
-            'dosi' => 'nullable|string|max:100',
-            'inici' => 'required|date',
-            'fi' => 'nullable|date',
+            'pacient_id'  => 'required|exists:pacients,id',
+            'nom'         => 'required|string|max:255',
+            'descripcio'  => 'nullable|string',
+            'dosi'        => 'nullable|string|max:100',
+            'inici'       => 'required|date',
+            'fi'          => 'nullable|date',
         ]);
 
         $medicament = Medicament::findOrFail($id);

@@ -19,17 +19,17 @@
         @csrf
 
         <div>
-            <label class="block font-semibold">Usuari</label>
-            <select name="usuaris_id" class="w-full p-2 border rounded" required>
-                <option value="">-- Selecciona un usuari --</option>
-                @foreach ($usuaris as $usuari)
-                    <option value="{{ $usuari->id }}" {{ old('usuaris_id') == $usuari->id ? 'selected' : '' }}>
-                        {{ $usuari->nom }}
+            <label class="block font-semibold">Pacient</label>
+            <select name="pacient_id" class="w-full p-2 border rounded" required>
+                <option value="">-- Selecciona un pacient --</option>
+                @foreach ($pacients as $pacient)
+                    <option value="{{ $pacient->id }}" {{ old('pacient_id') == $pacient->id ? 'selected' : '' }}>
+                        {{ $pacient->nom }}
                     </option>
                 @endforeach
             </select>
         </div>
-        
+
         <div>
             <label class="block font-semibold">Medicament</label>
             <select name="medicaments_id" class="w-full p-2 border rounded" required>
@@ -40,27 +40,34 @@
                     </option>
                 @endforeach
             </select>
-        </div>        
+        </div>
 
         <div>
             <label class="block font-semibold">Missatge</label>
-            <textarea name="missatge" class="w-full p-2 border rounded" rows="3" required></textarea>
+            <textarea name="missatge" class="w-full p-2 border rounded" rows="3" required>{{ old('missatge') }}</textarea>
         </div>
 
         <div>
             <label class="block font-semibold">Data i Hora</label>
-            <input type="datetime-local" name="data_hora" class="w-full p-2 border rounded" required>
+            <input type="datetime-local" name="data_hora" value="{{ old('data_hora') }}" class="w-full p-2 border rounded">
+        </div>
+
+        <div>
+            <label class="block font-semibold">Hora (opcional)</label>
+            <input type="time" name="hora" value="{{ old('hora') }}" class="w-full p-2 border rounded">
         </div>
 
         <div>
             <label class="block font-semibold">Dies de la setmana</label>
             @php
-                $dies = ['Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte', 'Diumenge'];
+                $diesDisponibles = ['Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte', 'Diumenge'];
+                $seleccionats = old('dies_setmana', []);
             @endphp
             <div class="grid grid-cols-2 gap-2">
-                @foreach ($dies as $dia)
+                @foreach ($diesDisponibles as $dia)
                     <label class="inline-flex items-center">
-                        <input type="checkbox" name="dies_setmana[]" value="{{ $dia }}" class="mr-2">
+                        <input type="checkbox" name="dies_setmana[]" value="{{ $dia }}"
+                            {{ in_array($dia, $seleccionats) ? 'checked' : '' }} class="mr-2">
                         {{ $dia }}
                     </label>
                 @endforeach

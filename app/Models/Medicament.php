@@ -10,10 +10,18 @@ class Medicament extends Model
     use HasFactory;
 
     protected $table = 'medicaments';
-    protected $fillable = ['usuari_id', 'nom', 'descripcio', 'dosi', 'inici', 'fi'];
 
-    public function usuari()
+    protected $fillable = [
+        'pacient_id',
+        'nom',
+        'descripcio',
+        'dosi',
+        'inici',
+        'fi'
+    ];
+
+    public function pacient()
     {
-        return $this->belongsTo(Usuari::class, 'usuari_id');
+        return $this->belongsTo(Pacient::class, 'pacient_id');
     }
 }

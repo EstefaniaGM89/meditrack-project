@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Crear Usuario')
+@section('title', 'Crear Pacient')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-6">Crear Usuari</h2>
+    <h2 class="text-2xl font-bold mb-6">Crear Pacient</h2>
 
     @if ($errors->any())
         <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form action="{{ route('usuaris.store') }}" method="POST" class="space-y-4 max-w-md">
+    <form action="{{ route('pacients.store') }}" method="POST" class="space-y-4 max-w-md">
         @csrf
         <div>
             <label class="block font-semibold">Nom</label>
@@ -39,7 +39,7 @@
 
         <div class="flex gap-3 mt-4">
             <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Guardar</button>
-            <a href="{{ route('usuaris.index') }}" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Cancelar</a>
+            <a href="{{ route('pacients.index') }}" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Cancelar</a>
         </div>
     </form>
 @endsection
