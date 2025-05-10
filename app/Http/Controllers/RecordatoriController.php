@@ -12,7 +12,7 @@ class RecordatoriController extends Controller
 {
     public function index()
     {
-        $recordatoris = Recordatori::all();
+        $recordatoris = Recordatori::with(['pacient', 'medicament'])->get();
         return view('recordatoris.index', compact('recordatoris'));
     }
 
@@ -26,12 +26,14 @@ class RecordatoriController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'pacient_id'     => 'required|exists:pacients,id',
-            'medicaments_id' => 'required|exists:medicaments,id',
-            'missatge'       => 'required|string|max:255',
-            'data_hora'      => 'nullable|date',
-            'hora'           => 'nullable|date_format:H:i',
-            'dies_setmana'   => 'nullable|array',
+            'pacient_id' => 'required|exists:pacients,id',
+            'medicament_id' => 'required|exists:medicaments,id',
+            'missatge' => 'required|string|max:255',
+            'inici' => 'required|date',
+            'fi' => 'nullable|date|after_or_equal:inici',
+            'data_hora' => 'nullable|date',
+            'hora' => 'nullable|date_format:H:i',
+            'dies_setmana' => 'nullable|array',
             'dies_setmana.*' => 'in:Dilluns,Dimarts,Dimecres,Dijous,Divendres,Dissabte,Diumenge',
         ]);
 
@@ -49,12 +51,6 @@ class RecordatoriController extends Controller
         return redirect()->route('recordatoris.index')->with('success', 'Recordatori creat correctament.');
     }
 
-    public function show($id)
-    {
-        $recordatori = Recordatori::findOrFail($id);
-        return view('recordatoris.show', compact('recordatori'));
-    }
-
     public function edit($id)
     {
         $recordatori = Recordatori::findOrFail($id);
@@ -66,12 +62,14 @@ class RecordatoriController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'pacient_id'     => 'required|exists:pacients,id',
-            'medicaments_id' => 'required|exists:medicaments,id',
-            'missatge'       => 'required|string|max:255',
-            'data_hora'      => 'nullable|date',
-            'hora'           => 'nullable|date_format:H:i',
-            'dies_setmana'   => 'nullable|array',
+            'pacient_id' => 'required|exists:pacients,id',
+            'medicament_id' => 'required|exists:medicaments,id',
+            'missatge' => 'required|string|max:255',
+            'inici' => 'required|date',
+            'fi' => 'nullable|date|after_or_equal:inici',
+            'data_hora' => 'nullable|date',
+            'hora' => 'nullable|date_format:H:i',
+            'dies_setmana' => 'nullable|array',
             'dies_setmana.*' => 'in:Dilluns,Dimarts,Dimecres,Dijous,Divendres,Dissabte,Diumenge',
         ]);
 

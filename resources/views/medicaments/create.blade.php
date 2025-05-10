@@ -19,8 +19,13 @@
         @csrf
 
         <div>
-            <label class="block font-semibold">ID del Medicament</label>
+            <label class="block font-semibold">Nom</label>
             <input type="text" name="nom" class="w-full p-2 border rounded" required>
+        </div>
+
+        <div>
+            <label class="block font-semibold">Dosi</label>
+            <input type="text" name="dosi" class="w-full p-2 border rounded" required>
         </div>
 
         <div>
@@ -28,24 +33,9 @@
             <textarea name="descripcio" class="w-full p-2 border rounded" rows="3"></textarea>
         </div>
 
-        <div>
-            <label class="block font-semibold">Dosi</label>
-            <input type="text" name="dosi" class="w-full p-2 border rounded" required>
-        </div>
-        
-        <div>
-            <label class="block font-semibold">Data d'inici</label>
-            <input type="date" name="inici" class="w-full p-2 border rounded" required>
-        </div>
-        
-        <div>
-            <label class="block font-semibold">Data de fi</label>
-            <input type="date" name="fi" class="w-full p-2 border rounded">
-        </div>
-        
         <div class="flex gap-3 mt-4">
             <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Guardar</button>
-            <a href="{{ route('medicaments.index') }}" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Cancelar</a>
+            <a href="{{ route('medicaments.index') }}" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Cancel·lar</a>
         </div>
     </form>
 @endsection

@@ -9,19 +9,10 @@ class Medicament extends Model
 {
     use HasFactory;
 
-    protected $table = 'medicaments';
+    protected $fillable = ['nom', 'dosi', 'descripcio'];
 
-    protected $fillable = [
-        'pacient_id',
-        'nom',
-        'descripcio',
-        'dosi',
-        'inici',
-        'fi'
-    ];
-
-    public function pacient()
+    public function recordatoris()
     {
-        return $this->belongsTo(Pacient::class, 'pacient_id');
+        return $this->hasMany(Recordatori::class);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Medicament;
-use App\Models\Pacient;
 
 class MedicamentController extends Controller
 {
@@ -16,46 +15,44 @@ class MedicamentController extends Controller
 
     public function create()
     {
-        $pacients = Pacient::all();
-        return view('medicaments.create', compact('pacients'));
+        return view('medicaments.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'pacient_id'  => 'required|exists:pacients,id',
-            'nom'         => 'required|string|max:255',
-            'descripcio'  => 'nullable|string',
-            'dosi'        => 'nullable|string|max:100',
-            'inici'       => 'required|date',
-            'fi'          => 'nullable|date',
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'dosi' => 'required|string|max:50',
+            'descripcio' => 'nullable|string',
         ]);
 
-        Medicament::create($request->all());
+        Medicament::create($validated);
 
         return redirect()->route('medicaments.index')->with('success', 'Medicament creat correctament.');
+    }
+
+    public function show($id)
+    {
+        $medicament = Medicament::findOrFail($id);
+        return view('medicaments.show', compact('medicament'));
     }
 
     public function edit($id)
     {
         $medicament = Medicament::findOrFail($id);
-        $pacients = Pacient::all();
-        return view('medicaments.edit', compact('medicament', 'pacients'));
+        return view('medicaments.edit', compact('medicament'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'pacient_id'  => 'required|exists:pacients,id',
-            'nom'         => 'required|string|max:255',
-            'descripcio'  => 'nullable|string',
-            'dosi'        => 'nullable|string|max:100',
-            'inici'       => 'required|date',
-            'fi'          => 'nullable|date',
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'dosi' => 'required|string|max:50',
+            'descripcio' => 'nullable|string',
         ]);
 
         $medicament = Medicament::findOrFail($id);
-        $medicament->update($request->all());
+        $medicament->update($validated);
 
         return redirect()->route('medicaments.index')->with('success', 'Medicament actualitzat correctament.');
     }

@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('personal_sanitari', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->string('rol')->nullable();
+            $table->string('email')->unique();
+            $table->string('password');
             $table->timestamps();
+            
         });
     }
 

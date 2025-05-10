@@ -22,10 +22,23 @@ class PacientController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom'             => 'required|string|max:255',
-            'email'           => 'required|string|email|max:255|unique:pacients',
-            'pass'            => 'required|string|min:4',
-            'data_naixement'  => 'required|date',
+            'nom'              => 'required|string|max:255',
+            'email'            => 'required|string|email|max:255|unique:pacients',
+            'pass'             => 'required|string|min:4',
+            'data_naixement'   => 'required|date',
+            'num_document'     => 'nullable|string|unique:pacients',
+            'telefon'          => 'nullable|string|max:30',
+            'adreca'           => 'nullable|string|max:255',
+            'ciutat'           => 'nullable|string|max:100',
+            'codi_postal'      => 'nullable|string|max:10',
+            'provincia'        => 'nullable|string|max:100',
+            'pais'             => 'nullable|string|max:100',
+            'observacions'     => 'nullable|string',
+            'alergies'         => 'nullable|string',
+            'medicaments'      => 'nullable|string',
+            'antecedents'      => 'nullable|string',
+            'vacunes'          => 'nullable|string',
+            'metode_contacte'  => 'nullable|string|max:100',
         ]);
 
         $request['pass'] = Hash::make($request['pass']);
@@ -49,10 +62,23 @@ class PacientController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nom'             => 'required|string|max:255',
-            'email'           => 'required|string|email|max:255|unique:pacients,email,' . $id,
-            'pass'            => 'nullable|string|min:6',
-            'data_naixement'  => 'required|date',
+            'nom'              => 'required|string|max:255',
+            'email'            => 'required|string|email|max:255|unique:pacients,email,' . $id,
+            'pass'             => 'nullable|string|min:6',
+            'data_naixement'   => 'required|date',
+            'num_document'     => 'nullable|string|unique:pacients,num_document,' . $id,
+            'telefon'          => 'nullable|string|max:30',
+            'adreca'           => 'nullable|string|max:255',
+            'ciutat'           => 'nullable|string|max:100',
+            'codi_postal'      => 'nullable|string|max:10',
+            'provincia'        => 'nullable|string|max:100',
+            'pais'             => 'nullable|string|max:100',
+            'observacions'     => 'nullable|string',
+            'alergies'         => 'nullable|string',
+            'medicaments'      => 'nullable|string',
+            'antecedents'      => 'nullable|string',
+            'vacunes'          => 'nullable|string',
+            'metode_contacte'  => 'nullable|string|max:100',
         ]);
 
         $pacient = Pacient::findOrFail($id);

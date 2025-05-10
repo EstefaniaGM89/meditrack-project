@@ -18,23 +18,31 @@ class RecordatoriMedicament extends Notification
         $this->recordatori = $recordatori;
     }
 
+    // Especificamos que la notificación también irá a la base de datos
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database']; // 'database' canal para base de datos
     }
 
+    // Para el correo electrónico
     public function toMail($notifiable)
     {
-        // Aquí podríem personalitzar el missatge de correu electrònic
-        // i afegir informació addicional si calgués.
-        // Per exemple, podem afegir un enllaç a una pàgina web o una aplicació mòbil.
-    return (new MailMessage)
-        ->subject('Recordatori de medicació')
-        ->greeting('Hola!')
-        ->line("Toca prendre el medicament: **{$this->recordatori->medicament->nom}**")
-        ->line("Dosificació: {$this->recordatori->medicament->dosi}")
-        ->line("Hora programada: {$this->recordatori->data_hora}")
-        ->line('Cuida’t!');
+        return (new MailMessage)
+            ->subject('Recordatori de medicament')
+            ->greeting('Hola!')
+            ->line("Toca prendre el medicament: **{$this->recordatori->medicament->nom}**")
+            ->line("Dosificació: {$this->recordatori->medicament->dosi}")
+            ->line("Hora programada: {$this->recordatori->data_hora}")
+            ->line('Cuida’t!');
     }
 
+    // Guardar la notificación en la base de datos
+    public function toDatabase($notifiable)
+    {
+        return [
+            'titol' => 'Recordatori de medicament',
+            'missatge' => "Toca prendre el medicament: {$this->recordatori->medicament->nom}",
+            'recordatori_id' => $this->recordatori->id, // Información adicional
+        ];
+    }
 }

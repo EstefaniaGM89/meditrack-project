@@ -3,7 +3,7 @@
 @section('title', 'Editar Recordatori')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-6">Editar Recordatori</h2>
+    <h2 class="text-2xl font-bold mb-6">✏️ Editar Recordatori</h2>
 
     @if ($errors->any())
         <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
@@ -15,59 +15,83 @@
         </div>
     @endif
 
-    <form action="{{ route('recordatoris.update', $recordatori->id) }}" method="POST" class="space-y-4 max-w-md">
+    <form action="{{ route('recordatoris.update', $recordatori->id) }}" method="POST" class="space-y-4 max-w-xl">
         @csrf
         @method('PUT')
 
         <div>
-            <label class="block font-semibold">ID del Pacient</label>
-            <input type="number" name="pacients_id" value="{{ old('pacients_id', $recordatori->pacients_id) }}" class="w-full p-2 border rounded" required>
+            <label class="block font-semibold">Pacient</label>
+            <select name="pacient_id" class="w-full p-2 border rounded" required>
+                @foreach($pacients as $pacient)
+                    <option value="{{ $pacient->id }}" {{ $recordatori->pacient_id == $pacient->id ? 'selected' : '' }}>
+                        {{ $pacient->nom }}
+                    </option>
+                @endforeach
+            </select>
         </div>
 
         <div>
-            <label class="block font-semibold">ID del Medicament</label>
-            <input type="number" name="medicaments_id" value="{{ old('medicaments_id', $recordatori->medicaments_id) }}" class="w-full p-2 border rounded" required>
+            <label class="block font-semibold">Medicament</label>
+            <select name="medicament_id" class="w-full p-2 border rounded" required>
+                @foreach($medicaments as $medicament)
+                    <option value="{{ $medicament->id }}" {{ $recordatori->medicament_id == $medicament->id ? 'selected' : '' }}>
+                        {{ $medicament->nom }}
+                    </option>
+                @endforeach
+            </select>
         </div>
 
         <div>
             <label class="block font-semibold">Missatge</label>
-            <textarea name="missatge" class="w-full p-2 border rounded" rows="3" required>{{ old('missatge', $recordatori->missatge) }}</textarea>
+            <input type="text" name="missatge" value="{{ old('missatge', $recordatori->missatge) }}" class="w-full p-2 border rounded" required>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block font-semibold">Data d'inici</label>
+                <input type="date" name="inici" value="{{ old('inici', $recordatori->inici) }}" class="w-full p-2 border rounded" required>
+            </div>
+
+            <div>
+                <label class="block font-semibold">Data de fi</label>
+                <input type="date" name="fi" value="{{ old('fi', $recordatori->fi) }}" class="w-full p-2 border rounded">
+            </div>
         </div>
 
         <div>
-            <label class="block font-semibold">Data i Hora (opcional)</label>
-            <input type="datetime-local" name="data_hora"
-                value="{{ old('data_hora', $recordatori->data_hora ? \Carbon\Carbon::parse($recordatori->data_hora)->format('Y-m-d\TH:i') : '') }}"
-                class="w-full p-2 border rounded">
-        </div>
-
-        <div>
-            <label class="block font-semibold">Hora (opcional)</label>
-            <input type="time" name="hora"
-                value="{{ old('hora', $recordatori->hora) }}"
-                class="w-full p-2 border rounded">
+            <label class="block font-semibold">Hora</label>
+            <input type="time" name="hora" value="{{ old('hora', $recordatori->hora) }}" class="w-full p-2 border rounded">
         </div>
 
         <div>
             <label class="block font-semibold">Dies de la setmana</label>
-            @php
-                $diesDisponibles = ['Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte', 'Diumenge'];
-                $diesSeleccionats = old('dies_setmana', $recordatori->dies_setmana ?? []);
-            @endphp
             <div class="grid grid-cols-2 gap-2">
-                @foreach ($diesDisponibles as $dia)
-                    <label class="inline-flex items-center">
-                        <input type="checkbox" name="dies_setmana[]" value="{{ $dia }}"
-                            {{ in_array($dia, $diesSeleccionats) ? 'checked' : '' }} class="mr-2">
+                @php
+                    $diesSeleccionats = is_array($recordatori->dies_setmana) ? $recordatori->dies_setmana : json_decode($recordatori->dies_setmana, true);
+                @endphp
+
+                @foreach(['Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte','Diumenge'] as $dia)
+                    <label>
+                        <input type="checkbox" name="dies_setmana[]" value="{{ $dia }}" {{ in_array($dia, $diesSeleccionats ?? []) ? 'checked' : '' }} class="mr-2">
                         {{ $dia }}
                     </label>
                 @endforeach
             </div>
         </div>
 
-        <div class="flex gap-3 mt-4">
-            <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Actualitzar</button>
-            <a href="{{ route('recordatoris.index') }}" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Cancelar</a>
+        <div class="flex gap-3 mt-6">
+            <button type="submit"
+                class="bg-yellow-500 hover:bg-green-600 text-white px-4 py-2 rounded text-sm font-semibold flex items-center gap-2">
+                💾 Guardar
+            </button>
+            <a href="{{ route('recordatoris.index') }}"
+               class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded text-sm font-semibold flex items-center gap-2">
+                Cancel·lar
+            </a>
         </div>
     </form>
 @endsection
+@section('scripts')
+    <script>
+        // Aquí pots afegir scripts addicionals si cal
+    </script>

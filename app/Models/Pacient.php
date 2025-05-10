@@ -2,29 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Pacient extends Model
 {
-    use HasFactory;
-
-    protected $table = 'pacients';
+    use HasFactory, Notifiable;
 
     protected $fillable = [
-        'nom',
-        'email',
-        'data_naixement',
-        'pass' // si aún lo usas
-    ];
+    'nom', 'email', 'pass', 'data_naixement', 'num_document', // <- asegúrate de tenerlo aquí
+    'telefon', 'adreca', 'ciutat', 'codi_postal', 'provincia',
+    'pais', 'observacions', 'alergies', 'medicaments',
+    'antecedents', 'vacunes', 'metode_contacte',
+];
+
+    protected $hidden = ['pass'];
 
     public function recordatoris()
     {
-        return $this->hasMany(Recordatori::class, 'pacient_id');
+        return $this->hasMany(Recordatori::class);
     }
 
-    public function medicaments()
+    public function dadesSalut()
     {
-        return $this->hasMany(Medicament::class);
+        return $this->hasMany(DadesSalut::class);
     }
 }

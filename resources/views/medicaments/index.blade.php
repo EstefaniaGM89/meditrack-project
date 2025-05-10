@@ -1,43 +1,75 @@
 @extends('layouts.app')
 
-@section('title', 'Medicaments')
+@section('title', 'Llistat de Medicaments')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-6">Llista de Medicaments</h2>
-    <a href="{{ route('medicaments.create') }}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Nou Medicament</a>
+    <h2 class="text-2xl font-bold mb-6">💊 Llistat de Medicaments</h2>
 
-    @if (session('success'))
-        <div class="bg-green-100 text-green-800 p-4 rounded mb-4">
+    <a href="{{ route('medicaments.create') }}"
+       class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 mb-4 inline-block">
+        ➕ Afegir Medicament
+    </a>
+
+    @if(session('success'))
+        <div class="bg-green-100 text-green-800 p-3 rounded mb-4">
             {{ session('success') }}
         </div>
     @endif
 
-    <table class="table-auto w-full bg-white shadow rounded mt-6">
-        <thead class="bg-gray-200 text-left">
-            <tr>
-                <th class="p-2">ID Medicament</th>
-                <th class="p-2">Nom</th>
-                <th class="p-2">Descripció</th>
-                <th class="p-2">Accions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($medicaments as $medicament)
-                <tr class="border-b">
-                    <td class="p-2">{{ $medicament->id }}</td>
-                    <td class="p-2">{{ $medicament->nom }}</td>
-                    <td class="p-2">{{ $medicament->descripcio }}</td>
-                    <td class="p-2">{{ $medicament->dosi }}</td>
-                    <td class="p-2 space-x-2">
-                        <a href="{{ route('medicaments.edit', $medicament->id) }}" class="text-yellow-600 hover:underline mr-2">Editar</a>
-                        <form action="{{ route('medicaments.destroy', $medicament->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('¿Estàs segur de que vols eliminar aquest medicament?')">Eliminar</button>
-                        </form>
-                    </td>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border shadow text-sm">
+            <thead class="bg-indigo-100">
+                <tr>
+                    <th class="px-4 py-2 text-left">Nom</th>
+                    <th class="px-4 py-2 text-left">Dosi</th>
+                    <th class="px-4 py-2 text-left">Descripció</th>
+                    <th class="px-4 py-2 text-center">Accions</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse($medicaments as $medicament)
+                    <tr class="border-t hover:bg-gray-50">
+                        <td class="px-4 py-2">{{ $medicament->nom }}</td>
+                        <td class="px-4 py-2">{{ $medicament->dosi }}</td>
+                        <td class="px-4 py-2">{{ $medicament->descripcio }}</td>
+                        <td class="px-4 py-2">
+                            <div class="flex justify-center gap-2">
+                                <a href="{{ route('medicaments.show', $medicament->id) }}"
+                                   class="bg-blue-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
+                                   title="Veure">
+                                    👁️
+                                </a>
+                                <a href="{{ route('medicaments.edit', $medicament->id) }}"
+                                   class="bg-yellow-400 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
+                                   title="Editar">
+                                    ✏️
+                                </a>
+                                <form action="{{ route('medicaments.destroy', $medicament->id) }}" method="POST"
+                                      onsubmit="return confirm('Vols eliminar aquest medicament?')"
+                                      class="flex items-center justify-center">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                            class="bg-red-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
+                                            title="Eliminar">
+                                        🗑️
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center text-gray-500 py-4">No hi ha medicaments registrats.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        // Aquí pots afegir scripts addicionals si cal
+    </script>
 @endsection
