@@ -23,14 +23,14 @@ class DashboardController extends Controller
         $lastPacient = Pacient::latest()->first();
         $lastRecordatori = Recordatori::with(['pacient', 'medicament'])->latest()->first();
 
-        // Pasar les dades al Dashboard
+        // Pasar les dades al 
         return view('layouts.dashboard', compact(
             'pacientsCount',
             'medicamentsCount',
             'recordatorisCount',
             'lastPacient',
             'lastRecordatori',
-            'notificacions' // Pasar les notificacions aquí
+            'notificacions' // Pasar las notificaciones aquí
         ));
     }
 }

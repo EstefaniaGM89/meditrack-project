@@ -16,6 +16,22 @@
        ➕ Afegir Pacient
     </a>
 
+    <!-- 🔍 Barra de cerca -->
+    <form method="GET" action="{{ route('pacients.index') }}" class="mb-6">
+        <div class="flex flex-col sm:flex-row gap-4 items-center">
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Buscar per nom..."
+                class="w-full sm:w-64 p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200"
+            >
+            <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+                🔍 Buscar
+            </button>
+        </div>
+    </form>
+
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white border shadow text-sm">
             <thead class="bg-indigo-100">
@@ -75,6 +91,11 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
+
+    <!-- Opcional: paginació -->
+    <div class="mt-4">
+        {{ $pacients->appends(['search' => request('search')])->links() }}
     </div>
 @endsection
 
