@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PersonalSanitari;
-use Illuminate\Support\Facades\Hash;
 
 class PersonalSanitariController extends Controller
 {
     public function index()
     {
-        $personal = PersonalSanitari::all();
-        return view('personal_sanitari.index', compact('personal'));
+        $personals = PersonalSanitari::all();
+        return view('personal_sanitari.index', compact('personals'));
     }
 
     public function create()
@@ -22,49 +21,37 @@ class PersonalSanitariController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom'     => 'required|string|max:255',
-            'rol'     => 'nullable|string|max:50',
-            'email'   => 'required|email|unique:personal_sanitari,email',
-            'password'=> 'required|string|min:6',
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|unique:personal_sanitari',
+            'rol' => 'nullable|string|max:50',
         ]);
 
-        $request['password'] = Hash::make($request['password']);
         PersonalSanitari::create($request->all());
 
-        return redirect()->route('personal-sanitari.index')->with('success', 'Personal sanitari registrat correctament.');
+        return redirect()->route('personal-sanitari.index')->with('success', 'Personal creat correctament.');
     }
 
-    public function edit($id)
+    public function edit(PersonalSanitari $personal_sanitari)
     {
-        $persona = PersonalSanitari::findOrFail($id);
-        return view('personal_sanitari.edit', compact('persona'));
+        return view('personal_sanitari.edit', ['persona' => $personal_sanitari]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, PersonalSanitari $personal_sanitari)
     {
-        $persona = PersonalSanitari::findOrFail($id);
-
         $request->validate([
-            'nom'     => 'required|string|max:255',
-            'rol'     => 'nullable|string|max:50',
-            'email'   => 'required|email|unique:personal_sanitari,email,' . $persona->id,
-            'password'=> 'nullable|string|min:6',
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|unique:personal_sanitari,email,' . $personal_sanitari->id,
+            'rol' => 'nullable|string|max:50',
         ]);
 
-        if ($request->filled('password')) {
-            $request['password'] = Hash::make($request['password']);
-        } else {
-            unset($request['password']);
-        }
+        $personal_sanitari->update($request->all());
 
-        $persona->update($request->all());
-
-        return redirect()->route('personal-sanitari.index')->with('success', 'Dades actualitzades correctament.');
+        return redirect()->route('personal-sanitari.index')->with('success', 'Actualitzat correctament.');
     }
 
-    public function destroy($id)
+    public function destroy(PersonalSanitari $personal_sanitari)
     {
-        PersonalSanitari::destroy($id);
-        return redirect()->route('personal-sanitari.index')->with('success', 'Personal eliminat correctament.');
+        $personal_sanitari->delete();
+        return redirect()->route('personal-sanitari.index')->with('success', 'Eliminat correctament.');
     }
 }

@@ -1,55 +1,74 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DadesSalutController;
-use App\Http\Controllers\MedicamentController;
-use App\Http\Controllers\RecordatoriController;
-use App\Http\Controllers\PacientController;
-use App\Http\Controllers\PersonalSanitariController;
-use App\Http\Controllers\NotificacioController;
-
-use App\Models\Pacient;
-use App\Models\Medicament;
-use App\Models\Recordatori;
+use App\Http\Controllers\{
+    DadesSalutController,
+    MedicamentController,
+    RecordatoriController,
+    PacientController,
+    PersonalSanitariController
+};
+use App\Http\Controllers\Auth\LoginController; // ✅ Aquí está bien puesto
+use App\Models\{Pacient, Medicament, Recordatori};
 use App\Notifications\RecordatoriMedicament;
 
-// 🏠 Ruta del dashboard amb estadístiques
-Route::get('/', function () {
-    $pacientsCount = Pacient::count();
-    $medicamentsCount = Medicament::count();
-    $recordatorisCount = Recordatori::count();
-    $lastPacient = Pacient::latest()->first();
-    $lastRecordatori = Recordatori::with(['pacient', 'medicament'])->latest()->first();
+/*
+|--------------------------------------------------------------------------
+| Rutas públicas: login y registro
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['web'])->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
-    return view('layouts.dashboard', compact(
-        'pacientsCount',
-        'medicamentsCount',
-        'recordatorisCount',
-        'lastPacient',
-        'lastRecordatori'
-    ));
-})->name('dashboard');
+    Route::get('/register', [LoginController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [LoginController::class, 'register'])->name('register.post');
+});
 
-// 🔁 CRUD de les entitats
-Route::resource('pacients', PacientController::class);
-Route::resource('medicaments', MedicamentController::class);
-Route::resource('dades-salut', DadesSalutController::class);
-Route::resource('recordatoris', RecordatoriController::class);
-Route::resource('personal-sanitari', PersonalSanitariController::class);
+/*
+|--------------------------------------------------------------------------
+| Logout protegido
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['web', 'sanitari.auth'])->get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// 🔔 Notificacions (visualització i marcat com a llegides)
+/*
+|--------------------------------------------------------------------------
+| Rutas protegidas por sesión de sanitari
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['web', 'sanitari.auth'])->group(function () {
 
+    Route::get('/', function () {
+        $pacientsCount = Pacient::count();
+        $medicamentsCount = Medicament::count();
+        $recordatorisCount = Recordatori::count();
+        $lastPacient = Pacient::latest()->first();
+        $lastRecordatori = Recordatori::with(['pacient', 'medicament'])->latest()->first();
 
+        return view('layouts.dashboard', compact(
+            'pacientsCount',
+            'medicamentsCount',
+            'recordatorisCount',
+            'lastPacient',
+            'lastRecordatori'
+        ));
+    })->name('dashboard');
 
-// 📬 Ruta de prova per notificacions
-Route::get('/provamail', function () {
-    $recordatori = Recordatori::with('pacient')->first();
+    Route::resource('pacients', PacientController::class);
+    Route::resource('medicaments', MedicamentController::class);
+    Route::resource('dades-salut', DadesSalutController::class);
+    Route::resource('recordatoris', RecordatoriController::class);
+    Route::resource('personal-sanitari', PersonalSanitariController::class);
 
-    if (!$recordatori || !$recordatori->pacient) {
-        return "No hi ha recordatoris o pacients disponibles.";
-    }
+    Route::get('/provamail', function () {
+        $recordatori = Recordatori::with('pacient')->first();
 
-    $recordatori->pacient->notify(new RecordatoriMedicament($recordatori));
+        if (!$recordatori || !$recordatori->pacient) {
+            return "No hi ha recordatoris o pacients disponibles.";
+        }
 
-    return "✅ Notificació enviada! Revisa Mailtrap.";
+        $recordatori->pacient->notify(new RecordatoriMedicament($recordatori));
+        return "Notificació enviada! Revisa Mailtrap.";
+    });
 });
