@@ -12,25 +12,25 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Obtener las notificaciones no leídas del usuario autenticado
+        // Obtenir les notificacions no llegides de l'usuari autenticat
         $user = Auth::user();
-        $notificacions = $user->unreadNotifications;  // Obtener solo las notificaciones no leídas
+        $notificacions = $user->unreadNotifications;  // Obtenir notificacions no llegides
 
-        // Obtener estadísticas para el Dashboard
+        // Obtenir les dades per al dashboard
         $pacientsCount = Pacient::count();
         $medicamentsCount = Medicament::count();
         $recordatorisCount = Recordatori::count();
         $lastPacient = Pacient::latest()->first();
         $lastRecordatori = Recordatori::with(['pacient', 'medicament'])->latest()->first();
 
-        // Pasar las notificaciones al dashboard
+        // Pasar les dades al Dashboard
         return view('layouts.dashboard', compact(
             'pacientsCount',
             'medicamentsCount',
             'recordatorisCount',
             'lastPacient',
             'lastRecordatori',
-            'notificacions' // Pasar las notificaciones aquí
+            'notificacions' // Pasar les notificacions aquí
         ));
     }
 }

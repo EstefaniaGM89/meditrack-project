@@ -43,7 +43,7 @@
         </main>
     </div>
 
-    <!-- Mostrar notificación emergente si existe una sesión de éxito -->
+    <!-- Mostrar notificació emergent si existeix una sessió exitosa -->
     @if (session('success'))
         <div id="notification" class="fixed bottom-5 right-5 bg-green-500 text-white px-6 py-3 rounded shadow-lg opacity-100 transition-opacity duration-1000">
             {{ session('success') }}
@@ -51,8 +51,11 @@
 
         <script>
             setTimeout(function() {
-                document.getElementById('notification').style.opacity = 0;  // Desaparece después de 5 segundos
-            }, 5000); // 5000ms = 5 segundos
+                document.getElementById('notification').style.opacity = 0;  // Desapareix després de 5 segons
+                setTimeout(function() {
+                    document.getElementById('notification').style.display = 'none'; // Elimina l'element del DOM
+                }, 1000); // Espera 1 segon per eliminar l'element
+            }, 5000); // 5000ms = 5 segons
         </script>
     @endif
 
@@ -64,7 +67,7 @@
                 setTimeout(() => {
                     notification.classList.add('opacity-0');
                     notification.classList.add('transition-opacity');
-                }, 5000); // Desaparece después de 5 segundos
+                }, 5000); // Desapareix després de 5 segons
             });
         });
     </script>
