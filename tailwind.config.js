@@ -8,9 +8,13 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+      },
       animation: {
         wiggle: 'wiggle 1.2s ease-in-out infinite',
         heartbeat: 'heartbeat 1.5s ease-in-out infinite',
+        'slide-in': 'slide-in 0.5s ease-out',
       },
       keyframes: {
         wiggle: {
@@ -24,9 +28,10 @@ export default {
           '42%': { transform: 'scale(1.3)' },
           '70%': { transform: 'scale(1)' },
         },
-      },
-      fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        'slide-in': {
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
       },
     },
   },

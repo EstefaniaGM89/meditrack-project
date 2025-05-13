@@ -4,15 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'MediTrack')</title>
+    {{-- Script CRÍTIC per evitar parpadeo al carregar --}}
+    <script>
+        if (
+            localStorage.theme === 'dark' ||
+            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body
-    class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen font-sans transition-colors duration-300">
+    class="flex flex-col min-h-screen bg-gray-100 text-gray-700 dark:bg-gray-900 dark:text-gray-300 font-sans transition-colors duration-300">
+
     <!-- Header -->
     <header class="bg-indigo-600 text-white p-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
-            <!-- Capsula bategant -->
+            <!-- Càpsula bategant -->
             <svg class="w-7 h-7 animate-heartbeat transition duration-300" viewBox="0 0 64 64"
                 xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -21,26 +31,23 @@
                     </clipPath>
                 </defs>
                 <g clip-path="url(#capsule-clip)">
-                    <!-- Meitat blava -->
                     <rect x="0" y="0" width="64" height="64" fill="#3b82f6" />
-                    <!-- Meitat vermella -->
                     <rect x="32" y="0" width="32" height="64" fill="#ef4444" />
                 </g>
             </svg>
             <h1 class="text-2xl font-bold">MediTrack</h1>
         </div>
 
-        <!-- Botó mode fosc -->
         <button id="toggleDarkMode"
             class="bg-white text-indigo-700 px-3 py-1 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 transition">
             🌓 Tema
         </button>
     </header>
 
-    <!-- Layout -->
-    <div class="flex">
+    <!-- Contenidor principal: Sidebar + Contingut -->
+    <div class="flex flex-1">
         <!-- Sidebar -->
-        <aside class="w-64 bg-transparent p-4 hidden md:block min-h-screen">
+        <aside class="w-64 bg-transparent p-4 hidden md:block">
             <nav class="space-y-4">
                 <a href="{{ url('/') }}"
                     class="block p-4 rounded-xl bg-white shadow-md hover:shadow-lg transition transform hover:scale-[1.01] text-indigo-700 font-medium hover:bg-indigo-50 dark:bg-gray-800 dark:text-indigo-200 dark:hover:bg-indigo-700">
@@ -65,19 +72,30 @@
             </nav>
         </aside>
 
-        <!-- Main content -->
+        <!-- Contingut principal -->
         <main class="flex-1 p-6">
             @yield('content')
         </main>
     </div>
 
-    <!-- Notificació d'èxit -->
-    @if (session('success'))
-        <div id="notification"
-            class="fixed bottom-5 right-5 bg-green-500 text-white px-6 py-3 rounded shadow-lg opacity-100 transition-opacity duration-1000">
-            {{ session('success') }}
+    <!-- Toast d'èxit -->
+    @if(session('success'))
+        <div id="toastSuccess"
+            class="fixed bottom-6 right-6 z-50 flex items-center max-w-sm w-full p-4 text-sm text-gray-800 bg-green-100 rounded-lg shadow-lg dark:text-green-100 dark:bg-green-800 transition-opacity duration-500">
+            <svg class="w-6 h-6 mr-2 text-green-600 dark:text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414L9 13.414l4.707-4.707z"
+                    clip-rule="evenodd" />
+            </svg>
+            <span class="font-medium">{{ session('success') }}</span>
         </div>
     @endif
+
+    <!-- Footer fixat a sota sempre -->
+    <footer class="bg-gray-800 text-white p-4 text-center">
+        <p>&copy; 2025 MediTrack. Tots els drets reservats.</p>
+    </footer>
+
 </body>
 
 </html>

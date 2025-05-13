@@ -10,18 +10,12 @@
         ➕ Nou Recordatori
     </a>
 
-    @if(session('success'))
-        <div class="bg-green-100 text-green-800 p-3 rounded mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border shadow text-sm">
-            <thead class="bg-indigo-100">
+        <table class="min-w-full bg-white dark:bg-gray-800 border shadow text-sm text-gray-800 dark:text-gray-200">
+            <thead class="bg-indigo-100 dark:bg-indigo-700 text-gray-800 dark:text-white">
                 <tr>
                     <th class="px-4 py-2 text-left">Pacient</th>
-                    <th class="px-4 py-2 text-left">Medicament</th>
+                    <th class="px-4 py-2 text-left">Medicaments</th>
                     <th class="px-4 py-2 text-left">Missatge</th>
                     <th class="px-4 py-2 text-left">Hora</th>
                     <th class="px-4 py-2 text-left">Estat</th>
@@ -30,19 +24,15 @@
             </thead>
             <tbody>
                 @forelse($recordatoris as $recordatori)
-                    <tr class="border-t hover:bg-gray-50">
-                        <td class="px-4 py-2">{{ $recordatori->pacient->nom }}</td>
+                    <tr class="border-t hover:bg-gray-50 dark:hover:bg-gray-700">
+                        
                         <td class="px-4 py-2">{{ $recordatori->medicament->nom }}</td>
                         <td class="px-4 py-2">{{ $recordatori->missatge }}</td>
                         <td class="px-4 py-2">{{ $recordatori->hora }}</td>
                         <td class="px-4 py-2">{{ ucfirst($recordatori->estat) }}</td>
                         <td class="px-4 py-2">
                             <div class="flex justify-center gap-2">
-                                <a href="{{ route('recordatoris.show', $recordatori->id) }}"
-                                   class="bg-blue-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
-                                   title="Veure">
-                                    👁️
-                                </a>
+                              
                                 <a href="{{ route('recordatoris.edit', $recordatori->id) }}"
                                    class="bg-yellow-400 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
                                    title="Editar">
@@ -64,7 +54,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center text-gray-500 py-4">No hi ha recordatoris registrats.</td>
+                        <td colspan="6" class="text-center text-gray-500 dark:text-gray-400 py-4">No hi ha recordatoris registrats.</td>
                     </tr>
                 @endforelse
             </tbody>

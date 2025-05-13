@@ -3,17 +3,11 @@
 @section('title', 'Pacients')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-6">Llista de Pacients</h2>
-
-    @if (session('success'))
-        <div class="bg-green-100 text-green-800 p-4 rounded mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">Llista de Pacients</h2>
 
     <a href="{{ route('pacients.create') }}"
        class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 mb-4 inline-block">
-       ➕ Afegir Pacient
+       ➕ Nou Pacient
     </a>
 
     <!-- 🔍 Barra de cerca -->
@@ -23,18 +17,19 @@
                 type="text"
                 name="search"
                 value="{{ request('search') }}"
-                placeholder="Buscar per nom..."
-                class="w-full sm:w-64 p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200"
+                placeholder="Filtrar per nom..."
+                class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 bg-white dark:bg-gray-800 text-black dark:text-white"
             >
-            <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
-                🔍 Buscar
+            <button type="submit"
+                class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+                🔍
             </button>
         </div>
     </form>
 
     <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border shadow text-sm">
-            <thead class="bg-indigo-100">
+        <table class="min-w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow text-sm text-gray-800 dark:text-gray-100">
+            <thead class="bg-indigo-100 dark:bg-indigo-900">
                 <tr>
                     <th class="px-3 py-2 text-left">ID</th>
                     <th class="px-3 py-2 text-left">Nom</th>
@@ -48,7 +43,7 @@
             </thead>
             <tbody>
                 @forelse ($pacients as $pacient)
-                    <tr class="border-t hover:bg-gray-50">
+                    <tr class="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
                         <td class="px-3 py-2">{{ $pacient->id }}</td>
                         <td class="px-3 py-2">{{ $pacient->nom }}</td>
                         <td class="px-3 py-2">{{ $pacient->email }}</td>
@@ -84,7 +79,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="px-4 py-2 text-center text-gray-500">
+                        <td colspan="8" class="px-4 py-2 text-center text-gray-500 dark:text-gray-400">
                             No hi ha pacients registrats.
                         </td>
                     </tr>
@@ -99,8 +94,3 @@
     </div>
 @endsection
 
-@section('scripts')
-<script>
-    // Aquí pots afegir scripts addicionals si cal
-</script>
-@endsection

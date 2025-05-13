@@ -12,7 +12,7 @@ class RecordatoriController extends Controller
 {
     public function index()
     {
-        $recordatoris = Recordatori::with(['pacient', 'medicament'])->get();
+        $recordatoris = Recordatori::with(['pacient.medicaments', 'medicament'])->get();
         return view('recordatoris.index', compact('recordatoris'));
     }
 
