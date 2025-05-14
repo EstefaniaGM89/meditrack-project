@@ -6,17 +6,36 @@
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">👩‍⚕️ Personal Sanitari</h2>
 
     <a href="{{ route('personal-sanitari.create') }}"
-       class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 mb-4 inline-block">
+        class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 mb-4 inline-block">
         ➕ Nou Profesional
     </a>
 
-    <div class="overflow-x-auto">
-        <table class="min-w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow text-sm text-gray-800 dark:text-gray-100">
+    <!-- 🔍 Barra de cerca -->
+    <form method="GET" action="{{ route('personal-sanitari.index') }}" class="mb-6">
+        <div class="flex flex-col sm:flex-row gap-4 items-center">
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Filtrar per nom..."
+                class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-b-2 focus:border-indigo-400 focus:shadow-none bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 placeholder-opacity-80 italic"
+            >
+            <button type="submit"
+                class="px-4 py-2 bg-indigo-400 text-white rounded hover:bg-indigo-700 transition">
+                🔍
+            </button>
+        </div>
+    </form>
+
+    <div class="flex-1 overflow-x-auto">
+        <table
+            class="min-w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow text-sm text-gray-800 dark:text-gray-100">
             <thead class="bg-indigo-100 dark:bg-indigo-900">
                 <tr>
                     <th class="px-4 py-2 text-left">Nom</th>
                     <th class="px-4 py-2 text-left">Email</th>
                     <th class="px-4 py-2 text-left">Rol</th>
+                    <th class="px-4 py-2 text-left">Torn</th>
                     <th class="px-4 py-2 text-center">Accions</th>
                 </tr>
             </thead>
@@ -26,21 +45,22 @@
                         <td class="px-4 py-2">{{ $persona->nom }}</td>
                         <td class="px-4 py-2">{{ $persona->email }}</td>
                         <td class="px-4 py-2">{{ $persona->rol ?? '-' }}</td>
+                        <td class="px-4 py-2">{{ $persona->torn ?? '-' }}</td>
                         <td class="px-4 py-2">
                             <div class="flex justify-center gap-2">
                                 <a href="{{ route('personal-sanitari.edit', $persona->id) }}"
-                                   class="bg-yellow-400 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
-                                   title="Editar">
+                                    class="bg-yellow-400 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
+                                    title="Editar">
                                     ✏️
                                 </a>
                                 <form action="{{ route('personal-sanitari.destroy', $persona->id) }}" method="POST"
-                                      onsubmit="return confirm('Vols eliminar aquest registre?')"
-                                      class="flex items-center justify-center">
+                                    onsubmit="return confirm('Vols eliminar aquest registre?')"
+                                    class="flex items-center justify-center">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                            class="bg-red-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
-                                            title="Eliminar">
+                                        class="bg-red-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
+                                        title="Eliminar">
                                         🗑️
                                     </button>
                                 </form>

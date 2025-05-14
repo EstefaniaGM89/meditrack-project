@@ -7,7 +7,7 @@
         <h2 class="text-3xl font-extrabold mb-6 text-indigo-700 dark:text-indigo-300 text-center">🔐 Iniciar Sessió</h2>
 
         @if($errors->has('email'))
-            <div class="bg-red-100 text-red-700 p-3 rounded mb-4 dark:bg-red-700 dark:text-white">
+            <div class="bg-red-100 text-red-500 p-3 rounded mb-4 dark:bg-red-700 dark:text-white">
                 {{ $errors->first('email') }}
             </div>
         @endif

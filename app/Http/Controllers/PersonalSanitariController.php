@@ -24,9 +24,14 @@ class PersonalSanitariController extends Controller
             'nom' => 'required|string|max:255',
             'email' => 'required|email|unique:personal_sanitari',
             'rol' => 'nullable|string|max:50',
+            'torn' => 'required|in:dia,nit,irrellevant',
+            'password' => 'required|string|min:4',
         ]);
 
-        PersonalSanitari::create($request->all());
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password); // Encripta la contraseña
+
+        PersonalSanitari::create($data);
 
         return redirect()->route('personal-sanitari.index')->with('success', 'Personal creat correctament.');
     }
@@ -41,10 +46,18 @@ class PersonalSanitariController extends Controller
         $request->validate([
             'nom' => 'required|string|max:255',
             'email' => 'required|email|unique:personal_sanitari,email,' . $personal_sanitari->id,
-            'rol' => 'nullable|string|max:50',
+            'rol' => 'required|string|max:50',
+            'torn' => 'required|in:dia,nit,irrellevant',
+            'password' => 'nullable|string|min:4',
         ]);
 
-        $personal_sanitari->update($request->all());
+        $data = $request->only(['nom', 'email', 'rol', 'torn']);
+
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password); // Solo si la nueva contraseña fue enviada
+        }
+
+        $personal_sanitari->update($data);
 
         return redirect()->route('personal-sanitari.index')->with('success', 'Actualitzat correctament.');
     }

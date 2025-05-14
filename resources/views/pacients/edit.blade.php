@@ -23,104 +23,104 @@
             <div>
                 <label class="block font-semibold">Nom</label>
                 <input type="text" name="nom" value="{{ old('nom', $pacient->nom) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white" required>
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
             </div>
 
             <div>
                 <label class="block font-semibold">Email</label>
                 <input type="email" name="email" value="{{ old('email', $pacient->email) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white" required>
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
             </div>
 
             <div>
                 <label class="block font-semibold">Contrasenya (només si vols canviar-la)</label>
                 <input type="password" name="pass"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
 
             <div>
                 <label class="block font-semibold">Data de naixement</label>
                 <input type="date" name="data_naixement" value="{{ old('data_naixement', $pacient->data_naixement) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white" required>
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
             </div>
 
             <div>
                 <label class="block font-semibold">Telèfon</label>
                 <input type="text" name="telefon" value="{{ old('telefon', $pacient->telefon) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
 
             <div>
                 <label class="block font-semibold">Adreça</label>
                 <input type="text" name="adreca" value="{{ old('adreca', $pacient->adreca) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
 
             <div>
                 <label class="block font-semibold">Ciutat</label>
                 <input type="text" name="ciutat" value="{{ old('ciutat', $pacient->ciutat) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
 
             <div>
                 <label class="block font-semibold">Codi Postal</label>
                 <input type="text" name="codi_postal" value="{{ old('codi_postal', $pacient->codi_postal) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
 
             <div>
                 <label class="block font-semibold">Província</label>
                 <input type="text" name="provincia" value="{{ old('provincia', $pacient->provincia) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
 
             <div>
                 <label class="block font-semibold">País</label>
                 <input type="text" name="pais" value="{{ old('pais', $pacient->pais) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
 
             <div>
                 <label class="block font-semibold">Núm. Document</label>
                 <input type="text" name="num_document" value="{{ old('num_document', $pacient->num_document) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
 
             <div>
                 <label class="block font-semibold">Mètode de contacte</label>
                 <input type="text" name="metode_contacte" value="{{ old('metode_contacte', $pacient->metode_contacte) }}"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
         </div>
 
         <div class="mt-6">
             <label class="block font-semibold">Observacions</label>
             <textarea name="observacions" rows="3"
-                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">{{ old('observacions', $pacient->observacions) }}</textarea>
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">{{ old('observacions', $pacient->observacions) }}</textarea>
         </div>
 
         <div class="mt-2">
             <label class="block font-semibold">Al·lèrgies</label>
             <textarea name="alergies" rows="2"
-                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">{{ old('alergies', $pacient->alergies) }}</textarea>
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">{{ old('alergies', $pacient->alergies) }}</textarea>
         </div>
 
         <div class="mt-2">
             <label class="block font-semibold">Medicaments</label>
             <textarea name="medicaments" rows="2"
-                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">{{ old('medicaments', $pacient->medicaments) }}</textarea>
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">{{ old('medicaments', $pacient->medicaments) }}</textarea>
         </div>
 
         <div class="mt-2">
-            <label class="block font-semibold">Antecedents</label>
+            <label class="block font-semibold">Malalties</label>
             <textarea name="antecedents" rows="2"
-                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">{{ old('antecedents', $pacient->antecedents) }}</textarea>
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">{{ old('antecedents', $pacient->antecedents) }}</textarea>
         </div>
 
         <div class="mt-2">
             <label class="block font-semibold">Vacunes</label>
             <textarea name="vacunes" rows="2"
-                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white">{{ old('vacunes', $pacient->vacunes) }}</textarea>
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">{{ old('vacunes', $pacient->vacunes) }}</textarea>
         </div>
 
         <div class="flex gap-3 mt-6">

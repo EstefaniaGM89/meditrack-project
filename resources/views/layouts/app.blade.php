@@ -3,6 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'MediTrack')</title>
     {{-- Script CRÍTIC per evitar parpadeo al carregar --}}
     <script>
@@ -38,13 +43,19 @@
             <h1 class="text-2xl font-bold">MediTrack</h1>
         </div>
 
-        <button id="toggleDarkMode"
-            class="bg-white text-indigo-700 px-3 py-1 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 transition">
-            🌓 Tema
-        </button>
+        <div class="flex items-center gap-4">
+            <input type="checkbox" class="checkbox hidden" id="checkbox">
+            <label for="checkbox"
+                class="checkbox-label cursor-pointer bg-gray-800 dark:bg-gray-200 w-12 h-6 rounded-full flex items-center justify-between px-1 relative">
+                <i class="fas fa-moon text-yellow-400"></i>
+                <i class="fas fa-sun text-yellow-300"></i>
+                <span class="ball bg-white w-5 h-5 absolute top-0.5 left-0.5 rounded-full transition-transform"></span>
+            </label>
+        </div>
+
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded ml-4">
+            <button type="submit" class="bg-red-500 hover:bg-green-700 text-white px-3 py-1 rounded ml-4">
                 🔓 Tancar Sessió
             </button>
         </form>

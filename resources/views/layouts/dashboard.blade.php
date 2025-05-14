@@ -9,15 +9,13 @@
             <span>Benvingut/da a <span class="text-indigo-500 dark:text-indigo-300">MediTrack</span></span>
             <span class="inline-block text-3xl animate-wiggle">👋</span>
         </h2>
-        <p class="mt-2 text-gray-700 dark:text-gray-300 text-sm">
-            Gestiona fàcilment pacients, medicaments i recordatoris amb una interfície clara i moderna.
-        </p>
+    
         <p class="mt-2 text-indigo-700 dark:text-indigo-300 font-semibold">
             Sessió iniciada com: {{ Auth::user()->name }}
         </p>
     </div>
 
-        <div class="grid sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid 'sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Pacients -->
         <div
             class="p-6 rounded-2xl shadow-md border border-indigo-100 bg-indigo-50 hover:shadow-lg transition hover:scale-[1.02] duration-300">

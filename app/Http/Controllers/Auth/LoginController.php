@@ -30,7 +30,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Credencials incorrectes.',
+            'email' => 'Email o contrasenya incorrectes',
         ])->onlyInput('email');
     }
 

@@ -1,30 +1,43 @@
-import 'flowbite';
-import './bootstrap';
-import Chart from 'chart.js/auto';
-
-// APLICAR EL TEMA ABANS DEL RENDER
+// ✅ APLICAR TEMA ANTES DEL RENDER (pre-render)
 const html = document.documentElement;
 const storedTheme = localStorage.getItem('theme');
+
 if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     html.classList.add('dark');
 } else {
     html.classList.remove('dark');
 }
 
-// INTERACCIÓ I EVENT LISTENERS
+// ✅ LLIBRERIES
+import 'flowbite';
+import './bootstrap';
+import Chart from 'chart.js/auto';
+
+// ✅ INTERACCIÓ DESPRÉS DE CÀRREGA
 document.addEventListener('DOMContentLoaded', () => {
-    const toggleBtn = document.getElementById('toggleDarkMode');
+    const checkbox = document.getElementById("checkbox");
 
-    console.log('Classes inicials del <html>:', html.classList.value);
+    // Iniciar l'estat del toggle
+    if (checkbox) {
+        if (html.classList.contains("dark")) {
+            checkbox.checked = true;
+        } else {
+            checkbox.checked = false;
+        }
 
-    toggleBtn?.addEventListener('click', () => {
-        html.classList.toggle('dark');
-        const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
-        localStorage.setItem('theme', newTheme);
-        console.log('🔁 Tema canviat a:', newTheme);
-    });
+        checkbox.addEventListener("change", () => {
+            const isDark = checkbox.checked;
+            if (isDark) {
+                html.classList.add("dark");
+                localStorage.setItem("theme", "dark");
+            } else {
+                html.classList.remove("dark");
+                localStorage.setItem("theme", "light");
+            }
+        });
+    }
 
-    // Tancar notificacions automàticament
+    // ✅ Tancar notificacions
     const notification = document.getElementById('toastSuccess');
     if (notification) {
         setTimeout(() => {

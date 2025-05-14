@@ -15,34 +15,41 @@
         </div>
     @endif
 
-    <form action="{{ route('personal-sanitari.update', $persona->id) }}" method="POST" class="space-y-4 max-w-md">
+    <form action="{{ route('personal-sanitari.update', parameters: $persona->id) }}" method="POST" class="space-y-4 max-w-md">
         @csrf
         @method('PUT')
 
         <div>
             <label class="block font-semibold">Nom</label>
             <input type="text" name="nom" value="{{ old('nom', $persona->nom) }}"
-                class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
-                required>
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
         </div>
 
         <div>
             <label class="block font-semibold">Email</label>
             <input type="email" name="email" value="{{ old('email', $persona->email) }}"
-                class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
-                required>
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
         </div>
 
         <div>
-            <label class="block font-semibold">Contrasenya (només si la vols canviar)</label>
-            <input type="password" name="password"
-                class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+            <label class="block font-semibold">Contrasenya (Només si la vols canviar)</label>
+            <input type="password" name="password" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
         </div>
 
         <div>
             <label class="block font-semibold">Rol</label>
             <input type="text" name="rol" value="{{ old('rol', $persona->rol) }}"
-                class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-black dark:text-white">
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
+        </div>
+
+        <div>
+            <label class="block font-semibold">Torn</label>
+            <select name="torn" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
+                <option value="">-- Selecciona un torn --</option>
+                <option value="dia" @selected(old('torn') == 'dia')>Dia</option>
+                <option value="nit" @selected(old('torn') == 'nit')>Nit</option>
+                <option value="nit" @selected(old('torn') == 'nit')>Irrellevant</option>
+            </select>
         </div>
 
         <div class="flex gap-3 mt-6">
@@ -52,7 +59,7 @@
             </button>
 
             <a href="{{ route('pacients.index') }}"
-               class="bg-gray-300 hover:bg-green-500 dark:bg-gray-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
+                class="bg-gray-300 hover:bg-green-500 dark:bg-gray-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
                 Cancel·lar
             </a>
         </div>

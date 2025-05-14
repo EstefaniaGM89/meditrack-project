@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->date('fi')->nullable();
             $table->dateTime('data_hora')->nullable();
             $table->time('hora')->nullable();
-            $table->json('dies_setmana')->nullable();
+            $table->text('dies_setmana')->nullable();
             $table->enum('estat', ['pendent', 'completat'])->default('pendent');
             $table->timestamps();
         });

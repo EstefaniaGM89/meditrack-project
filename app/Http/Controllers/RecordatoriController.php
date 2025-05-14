@@ -10,9 +10,20 @@ use App\Notifications\RecordatoriMedicament;
 
 class RecordatoriController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $recordatoris = Recordatori::with(['pacient.medicaments', 'medicament'])->get();
+        $query = Recordatori::with(['pacient', 'medicament']);
+
+        // Opcional: filtrar per nom del pacient si hi ha cerca
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->whereHas('pacient', function ($q) use ($search) {
+                $q->where('nom', 'like', '%' . $search . '%');
+            });
+        }
+
+        $recordatoris = $query->orderByDesc('id')->paginate(10);
+
         return view('recordatoris.index', compact('recordatoris'));
     }
 
@@ -36,10 +47,6 @@ class RecordatoriController extends Controller
             'dies_setmana' => 'nullable|array',
             'dies_setmana.*' => 'in:Dilluns,Dimarts,Dimecres,Dijous,Divendres,Dissabte,Diumenge',
         ]);
-
-        if (isset($validated['dies_setmana'])) {
-            $validated['dies_setmana'] = json_encode($validated['dies_setmana']);
-        }
 
         $recordatori = Recordatori::create($validated);
 

@@ -18,13 +18,13 @@ class RecordatoriMedicament extends Notification
         $this->recordatori = $recordatori;
     }
 
-    // Especificamos que la notificación también irá a la base de datos
+    // Solo usamos el canal de correo, eliminamos 'database'
     public function via($notifiable)
     {
-        return ['mail', 'database']; // 'database' canal para base de datos
+        return ['mail']; // Ya no se usará la base de datos
     }
 
-    // Para el correo electrónico
+    // Si usas envío de correos, este es el contenido
     public function toMail($notifiable)
     {
         return (new MailMessage)
@@ -35,14 +35,5 @@ class RecordatoriMedicament extends Notification
             ->line("Hora programada: {$this->recordatori->data_hora}")
             ->line('Cuida’t!');
     }
-
-    // Guardar la notificación en la base de datos
-    public function toDatabase($notifiable)
-    {
-        return [
-            'titol' => 'Recordatori de medicament',
-            'missatge' => "Toca prendre el medicament: {$this->recordatori->medicament->nom}",
-            'recordatori_id' => $this->recordatori->id, // Información adicional
-        ];
-    }
+    // public function toArray($notifiable)
 }

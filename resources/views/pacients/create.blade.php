@@ -38,7 +38,7 @@
                     <input
                         type="{{ in_array($name, ['email']) ? 'email' : ($name === 'pass' ? 'password' : ($name === 'data_naixement' ? 'date' : 'text')) }}"
                         name="{{ $name }}"
-                        class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+                        class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white"
                         {{ in_array($name, ['nom', 'num_document', 'email', 'pass', 'data_naixement']) ? 'required' : '' }}>
                 </div>
             @endforeach
@@ -48,13 +48,13 @@
             'Observacions' => 'observacions',
             'Al·lèrgies' => 'alergies',
             'Medicaments' => 'medicaments',
-            'Antecedents' => 'antecedents',
+            'Malalties' => 'malalties',
             'Vacunes' => 'vacunes'
         ] as $label => $name)
             <div class="mt-2">
                 <label class="block font-semibold">{{ $label }}</label>
                 <textarea name="{{ $name }}" rows="2"
-                    class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white"></textarea>
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white"></textarea>
             </div>
         @endforeach
 

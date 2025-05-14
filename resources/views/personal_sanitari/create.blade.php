@@ -21,37 +21,30 @@
 
         <div>
             <label class="block font-semibold">Nom</label>
-            <input type="text" name="nom"
-                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
-                required>
+            <input type="text" name="nom" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
         </div>
 
         <div>
             <label class="block font-semibold">Email</label>
-            <input type="email" name="email"
-                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
-                required>
+            <input type="email" name="email" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
         </div>
 
         <div>
             <label class="block font-semibold">Contrasenya</label>
-            <input type="password" name="password"
-                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+            <input type="password" name="password" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white"
                 required>
         </div>
 
         <div>
             <label class="block font-semibold">Rol</label>
             <input type="text" name="rol"
-                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white"
                 placeholder="auxiliar, infermera, etc...">
         </div>
 
         <div>
             <label class="block font-semibold">Torn</label>
-            <select name="torn"
-                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
-                required>
+            <select name="torn" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
                 <option value="">-- Selecciona un torn --</option>
                 <option value="dia" @selected(old('torn') == 'dia')>Dia</option>
                 <option value="nit" @selected(old('torn') == 'nit')>Nit</option>

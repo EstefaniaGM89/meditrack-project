@@ -18,10 +18,9 @@
                 name="search"
                 value="{{ request('search') }}"
                 placeholder="Filtrar per nom..."
-                class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 bg-white dark:bg-gray-800 text-black dark:text-white"
+                class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-b-2 focus:border-indigo-400 focus:shadow-none bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 placeholder-opacity-80 italic"
             >
-            <button type="submit"
-                class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+            <button type="submit" class="px-4 py-2 bg-indigo-400 text-white rounded hover:bg-indigo-700 transition">
                 🔍
             </button>
         </div>
