@@ -7,9 +7,16 @@ use App\Models\Medicament;
 
 class MedicamentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $medicaments = Medicament::all();
+        $query = Medicament::query();
+
+        if ($request->filled('search')) {
+            $query->where('nom', 'like', '%' . $request->search . '%');
+        }
+
+        $medicaments = $query->orderBy('nom')->get();
+
         return view('medicaments.index', compact('medicaments'));
     }
 

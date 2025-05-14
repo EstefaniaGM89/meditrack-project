@@ -7,9 +7,16 @@ use App\Models\PersonalSanitari;
 
 class PersonalSanitariController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $personal = PersonalSanitari::all();
+        $query = PersonalSanitari::query();
+
+        if ($request->filled('search')) {
+            $query->where('nom', 'like', '%' . $request->search . '%');
+        }
+
+        $personal = $query->orderBy('nom')->get();
+
         return view('personal_sanitari.index', compact('personal'));
     }
 
@@ -29,7 +36,7 @@ class PersonalSanitariController extends Controller
         ]);
 
         $data = $request->all();
-        $data['password'] = bcrypt($request->password); // Encripta la contraseña
+        $data['password'] = bcrypt($request->password);
 
         PersonalSanitari::create($data);
 
@@ -54,7 +61,7 @@ class PersonalSanitariController extends Controller
         $data = $request->only(['nom', 'email', 'rol', 'torn']);
 
         if ($request->filled('password')) {
-            $data['password'] = bcrypt($request->password); // Solo si la nueva contraseña fue enviada
+            $data['password'] = bcrypt($request->password);
         }
 
         $personal_sanitari->update($data);

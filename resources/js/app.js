@@ -1,4 +1,4 @@
-// ✅ APLICAR TEMA ANTES DEL RENDER (pre-render)
+// APLICAR TEMA ABANS DEL RENDER (pre-render)
 const html = document.documentElement;
 const storedTheme = localStorage.getItem('theme');
 
@@ -8,36 +8,27 @@ if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color
     html.classList.remove('dark');
 }
 
-// ✅ LLIBRERIES
+// LLIBRERIES
 import 'flowbite';
 import './bootstrap';
 import Chart from 'chart.js/auto';
 
-// ✅ INTERACCIÓ DESPRÉS DE CÀRREGA
+// INTERACCIÓ DESPRÉS DE CÀRREGA
 document.addEventListener('DOMContentLoaded', () => {
     const checkbox = document.getElementById("checkbox");
 
-    // Iniciar l'estat del toggle
+    // Iniciar estat del toggle
     if (checkbox) {
-        if (html.classList.contains("dark")) {
-            checkbox.checked = true;
-        } else {
-            checkbox.checked = false;
-        }
+        checkbox.checked = html.classList.contains("dark");
 
         checkbox.addEventListener("change", () => {
             const isDark = checkbox.checked;
-            if (isDark) {
-                html.classList.add("dark");
-                localStorage.setItem("theme", "dark");
-            } else {
-                html.classList.remove("dark");
-                localStorage.setItem("theme", "light");
-            }
+            html.classList.toggle("dark", isDark);
+            localStorage.setItem("theme", isDark ? "dark" : "light");
         });
     }
 
-    // ✅ Tancar notificacions
+    //   notificacions ( quan s'implemntin aquestes )
     const notification = document.getElementById('toastSuccess');
     if (notification) {
         setTimeout(() => {
@@ -46,5 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 notification.remove();
             }, 500);
         }, 5000);
+    }
+
+    // Enviar formulari automàticament si s'esborra el filtre de cerca
+    const searchInput = document.querySelector('input[name="search"]');
+    if (searchInput) {
+        const form = searchInput.closest('form');
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value === '') {
+                form.submit();
+            }
+        });
     }
 });
