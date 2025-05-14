@@ -6,7 +6,7 @@
     <h2 class="text-2xl font-bold mb-6">⏰ Llistat de Recordatoris</h2>
 
     <a href="{{ route('recordatoris.create') }}"
-       class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 mb-4 inline-block">
+        class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 mb-4 inline-block">
         ➕ Nou Recordatori
     </a>
 
@@ -25,27 +25,26 @@
             <tbody>
                 @forelse($recordatoris as $recordatori)
                     <tr class="border-t hover:bg-gray-50 dark:hover:bg-gray-700">
-                        
-                        <td class="px-4 py-2">{{ $recordatori->medicament->nom }}</td>
+                        <td class="px-4 py-2">{{ $recordatori->pacient->nom ?? '—' }}</td>
+                        <td class="px-4 py-2">{{ $recordatori->medicament->nom ?? '—' }}</td>
                         <td class="px-4 py-2">{{ $recordatori->missatge }}</td>
                         <td class="px-4 py-2">{{ $recordatori->hora }}</td>
                         <td class="px-4 py-2">{{ ucfirst($recordatori->estat) }}</td>
                         <td class="px-4 py-2">
                             <div class="flex justify-center gap-2">
-                              
                                 <a href="{{ route('recordatoris.edit', $recordatori->id) }}"
-                                   class="bg-yellow-400 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
-                                   title="Editar">
+                                    class="bg-yellow-400 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
+                                    title="Editar">
                                     ✏️
                                 </a>
                                 <form action="{{ route('recordatoris.destroy', $recordatori->id) }}" method="POST"
-                                      onsubmit="return confirm('Segur que vols eliminar-ho?')"
-                                      class="flex items-center justify-center">
+                                    onsubmit="return confirm('Segur que vols eliminar-ho?')"
+                                    class="flex items-center justify-center">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                            class="bg-red-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
-                                            title="Eliminar">
+                                        class="bg-red-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
+                                        title="Eliminar">
                                         🗑️
                                     </button>
                                 </form>
@@ -54,7 +53,8 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center text-gray-500 dark:text-gray-400 py-4">No hi ha recordatoris registrats.</td>
+                        <td colspan="6" class="text-center text-gray-500 dark:text-gray-400 py-4">No hi ha recordatoris
+                            registrats.</td>
                     </tr>
                 @endforelse
             </tbody>

@@ -17,7 +17,7 @@
         </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Pacients -->
         <div
             class="p-6 rounded-2xl shadow-md border border-indigo-100 bg-indigo-50 hover:shadow-lg transition hover:scale-[1.02] duration-300">

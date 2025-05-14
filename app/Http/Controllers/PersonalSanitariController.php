@@ -9,8 +9,8 @@ class PersonalSanitariController extends Controller
 {
     public function index()
     {
-        $personals = PersonalSanitari::all();
-        return view('personal_sanitari.index', compact('personals'));
+        $personal = PersonalSanitari::all();
+        return view('personal_sanitari.index', compact('personal'));
     }
 
     public function create()
