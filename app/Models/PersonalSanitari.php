@@ -17,6 +17,7 @@ class PersonalSanitari extends Authenticatable
         'rol',
         'email',
         'password',
+        'torn',
     ];
 
     protected $hidden = [

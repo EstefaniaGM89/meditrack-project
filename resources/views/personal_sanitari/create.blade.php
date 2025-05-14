@@ -47,6 +47,17 @@
                 placeholder="auxiliar, infermera, etc...">
         </div>
 
+        <div>
+            <label class="block font-semibold">Torn</label>
+            <select name="torn"
+                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+                required>
+                <option value="">-- Selecciona un torn --</option>
+                <option value="dia" @selected(old('torn') == 'dia')>Dia</option>
+                <option value="nit" @selected(old('torn') == 'nit')>Nit</option>
+                <option value="nit" @selected(old('torn') == 'nit')>Irrellevant</option>
+            </select>
+        </div>
 
         <div class="flex gap-3 mt-6">
             <button type="submit"
