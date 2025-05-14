@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\PersonalSanitari;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -21,43 +22,43 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        $credentials = $request->only('email', 'password');
 
-        $user = PersonalSanitari::where('email', $request->email)->first();
-
-        if ($user && Hash::check($request->password, $user->password)) {
-            session(['sanitari_id' => $user->id]);
-            return redirect()->route('dashboard');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/'); // o route('dashboard')
         }
 
-        return back()->with('error', 'Credencials incorrectes.');
+        return back()->withErrors([
+            'email' => 'Credencials incorrectes.',
+        ])->onlyInput('email');
     }
 
     public function register(Request $request)
     {
         $request->validate([
-            'nom' => 'required|string|max:255',
-            'email' => 'required|email|unique:personal_sanitari',
-            'password' => 'required|string|min:6',
-            'rol' => 'nullable|string|max:50',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6|confirmed',
         ]);
 
-        PersonalSanitari::create([
-            'nom' => $request->nom,
+        $user = User::create([
+            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'rol' => $request->rol,
         ]);
 
-        return redirect()->route('login')->with('success', 'Registre completat correctament.');
+        Auth::login($user);
+        return redirect('/');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        session()->forget('sanitari_id');
-        return redirect()->route('login');
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

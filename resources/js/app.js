@@ -1,4 +1,5 @@
 import 'flowbite';
+import './bootstrap';
 import Chart from 'chart.js/auto';
 
 // APLICAR EL TEMA ABANS DEL RENDER

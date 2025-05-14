@@ -42,6 +42,13 @@
             class="bg-white text-indigo-700 px-3 py-1 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 transition">
             🌓 Tema
         </button>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded ml-4">
+                🔓 Tancar Sessió
+            </button>
+        </form>
+
     </header>
 
     <!-- Contenidor principal: Sidebar + Contingut -->

@@ -8,7 +8,7 @@ use App\Http\Controllers\{
     PacientController,
     PersonalSanitariController
 };
-use App\Http\Controllers\Auth\LoginController; // ✅ Aquí está bien puesto
+use App\Http\Controllers\Auth\LoginController;
 use App\Models\{Pacient, Medicament, Recordatori};
 use App\Notifications\RecordatoriMedicament;
 
@@ -17,27 +17,25 @@ use App\Notifications\RecordatoriMedicament;
 | Rutas públicas: login y registro
 |--------------------------------------------------------------------------
 */
-Route::middleware(['web'])->group(function () {
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
-    Route::get('/register', [LoginController::class, 'showRegisterForm'])->name('register');
-    Route::post('/register', [LoginController::class, 'register'])->name('register.post');
-});
+Route::get('/register', [LoginController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [LoginController::class, 'register'])->name('register.post');
 
 /*
 |--------------------------------------------------------------------------
 | Logout protegido
 |--------------------------------------------------------------------------
 */
-Route::middleware(['web', 'sanitari.auth'])->get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 /*
 |--------------------------------------------------------------------------
-| Rutas protegidas por sesión de sanitari
+| Rutas protegidas por auth
 |--------------------------------------------------------------------------
 */
-Route::middleware(['web', 'sanitari.auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/', function () {
         $pacientsCount = Pacient::count();
