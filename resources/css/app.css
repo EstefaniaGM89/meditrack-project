@@ -17,3 +17,35 @@ input[type="checkbox"] {
   -moz-appearance: checkbox !important;
 }
 
+/* Mida de font global equilibrada */
+html {
+  font-size: 16px; /* base neutra */
+}
+
+/* Mòbils */
+@media (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* Pantalles mitjanes */
+@media (min-width: 641px) and (max-width: 1023px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Pantalles grans */
+@media (min-width: 1024px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* Pantalles extra grans */
+@media (min-width: 1536px) {
+  html {
+    font-size: 20px;
+  }
+}
