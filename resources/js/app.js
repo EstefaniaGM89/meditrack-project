@@ -1,3 +1,4 @@
+
 // APLICAR TEMA ABANS DEL RENDER (pre-render)
 const html = document.documentElement;
 const storedTheme = localStorage.getItem('theme');
@@ -49,4 +50,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
 });
