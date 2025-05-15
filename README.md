@@ -60,11 +60,16 @@ Se puede registrar un nuevo usuario desde el formulario de registro. El sistema 
 
 ⦁   PHP
 ⦁	Laravel 12
-⦁	Tailwind CSS
 ⦁	MySQL
 ⦁	Blade (motor de plantillas)
-⦁   CSS
 ⦁	JavaScript
+⦁	CSS
+⦁   Tailwind CSS
+
+**Stack y herramientas adicionales**
+
+*Flowbite*: biblioteca de componentes UI basada en Tailwind CSS. Se utiliza para botones, formularios, modales, etc.
+*Vite*: herramienta moderna de construcción frontend, usada para compilar JS/CSS y proporcionar recarga en caliente durante el desarrollo.
 
 **Autora**
 
