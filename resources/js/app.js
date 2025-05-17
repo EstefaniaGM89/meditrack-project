@@ -1,12 +1,15 @@
-
 // APLICAR TEMA ABANS DEL RENDER (pre-render)
 const html = document.documentElement;
-const storedTheme = localStorage.getItem('theme');
+const isAuthPage = document.body.dataset.auth === "true";
 
-if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    html.classList.add('dark');
-} else {
-    html.classList.remove('dark');
+// Aplica modo dinámico solo si NO es una página de login o register
+if (!isAuthPage) {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        html.classList.add('dark');
+    } else {
+        html.classList.remove('dark');
+    }
 }
 
 // LLIBRERIES
@@ -18,8 +21,17 @@ import Chart from 'chart.js/auto';
 document.addEventListener('DOMContentLoaded', () => {
     const checkbox = document.getElementById("checkbox");
 
-    // Iniciar estat del toggle
-    if (checkbox) {
+    // Splash screen de benvinguda
+    const splash = document.getElementById('splash');
+    if (splash) {
+        setTimeout(() => {
+            splash.classList.add('opacity-0');
+            setTimeout(() => splash.remove(), 1000);
+        }, 1000);
+    }
+
+    // Iniciar estat del toggle (només si hi ha toggle present i no estem a auth)
+    if (checkbox && !isAuthPage) {
         checkbox.checked = html.classList.contains("dark");
 
         checkbox.addEventListener("change", () => {
@@ -29,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    //   notificacions ( quan s'implemntin aquestes )
+    // notificacions (quan s'implementin aquestes)
     const notification = document.getElementById('toastSuccess');
     if (notification) {
         setTimeout(() => {
@@ -50,5 +62,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
 });

@@ -3,7 +3,16 @@
 @section('title', 'Iniciar Sessió')
 
 @section('content')
-      <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-8 w-full max-w-md">
+    {{-- Splash screen reutilizable --}}
+    @include('components.auth.splash')
+
+    <div class="absolute inset-0 bg-black bg-opacity-30 -z-10"></div>
+
+    {{-- Formulario de login --}}
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-8 w-full max-w-md z-10 relative">
+        @include('components.auth.logo')
+
+
         <h2 class="text-3xl font-extrabold mb-6 text-indigo-700 dark:text-indigo-300 text-center">🔐 Iniciar Sessió</h2>
 
         @if($errors->has('email'))
@@ -17,23 +26,24 @@
             <div>
                 <label class="block text-gray-700 dark:text-gray-300 font-semibold">Email</label>
                 <input type="email" name="email" required value="{{ old('email') }}"
-                       class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
+                    class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
             </div>
 
             <div>
                 <label class="block text-gray-700 dark:text-gray-300 font-semibold">Contrasenya</label>
                 <input type="password" name="password" required
-                       class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
+                    class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
             </div>
 
             <button type="submit"
-                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded w-full font-semibold">
+                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded w-full font-semibold">
                 Iniciar Sessió
             </button>
         </form>
 
         <p class="mt-4 text-sm text-gray-600 dark:text-gray-300 text-center">
-            Encara no tens compte? <a href="{{ route('register') }}" class="text-indigo-600 hover:underline">Registra't aquí</a>
+            Encara no tens compte? <a href="{{ route('register') }}" class="text-indigo-600 hover:underline">Registra't
+                aquí</a>
         </p>
     </div>
 @endsection

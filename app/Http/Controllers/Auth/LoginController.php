@@ -26,7 +26,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dahboard');
+            return redirect()->route('dashboard'); // ✅ redirección segura
         }
 
         return back()->withErrors([
@@ -49,7 +49,7 @@ class LoginController extends Controller
         ]);
 
         Auth::login($user);
-        return redirect('/');
+        return redirect()->route('dashboard')->with('success', 'Usuari creat correctament.');
     }
 
     public function logout(Request $request)
@@ -59,6 +59,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

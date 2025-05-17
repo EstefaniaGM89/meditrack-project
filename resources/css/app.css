@@ -19,33 +19,51 @@ input[type="checkbox"] {
 
 /* Mida de font global equilibrada */
 html {
-  font-size: 16px; /* base neutra */
+  font-size: 16px;
 }
 
-/* Mòbils */
 @media (max-width: 640px) {
   html {
     font-size: 15px;
   }
 }
 
-/* Pantalles mitjanes */
 @media (min-width: 641px) and (max-width: 1023px) {
   html {
     font-size: 16px;
   }
 }
 
-/* Pantalles grans */
 @media (min-width: 1024px) {
   html {
     font-size: 18px;
   }
 }
 
-/* Pantalles extra grans */
 @media (min-width: 1536px) {
   html {
     font-size: 20px;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+.animate-fade-in {
+  animation: fade-in 1.5s ease-in-out;
+}
+
+@layer components {
+  .splash-screen {
+    @apply fixed inset-0 z-50 flex flex-col items-center justify-center bg-white dark:bg-gray-900 transition-opacity duration-1000;
+  }
+
+  .splash-logo {
+    @apply h-24 mb-4 animate-pulse;
+  }
+
+  .splash-text {
+    @apply text-indigo-600 dark:text-indigo-300 font-semibold text-lg animate-fade-in;
   }
 }
