@@ -1,3 +1,4 @@
+<!-- Controlador dels pacients -->
 <?php
 
 namespace App\Http\Controllers;

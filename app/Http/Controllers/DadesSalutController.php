@@ -1,3 +1,4 @@
+<!-- Controlador de dades de salut no implementat -->
 <?php
 
 namespace App\Http\Controllers;

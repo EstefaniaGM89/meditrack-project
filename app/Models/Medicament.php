@@ -1,3 +1,4 @@
+<!-- Model per els medicaments -->
 <?php
 
 namespace App\Models;

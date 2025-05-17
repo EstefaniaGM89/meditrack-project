@@ -1,12 +1,11 @@
+<!-- Vista de plantilla del layout d'autenticació -->
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth dark"> {{-- Modo oscuro siempre activado --}}
+
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>@yield('title', 'MediTrack')</title>
-
-    {{-- No se incluye script de tema, se forza modo oscuro --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -15,4 +14,5 @@
         @yield('content')
     </main>
 </body>
+
 </html>

@@ -1,3 +1,4 @@
+<!-- Vista de llistat de pacients -->
 @extends('layouts.app')
 
 @section('title', 'Pacients')

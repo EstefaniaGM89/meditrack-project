@@ -1,3 +1,4 @@
+<!-- Vista d' edició de pacients -->
 @extends('layouts.app')
 
 @section('title', 'Editar Pacient')
@@ -15,7 +16,8 @@
         </div>
     @endif
 
-    <form action="{{ route('pacients.update', $pacient->id) }}" method="POST" class="space-y-4 max-w-2xl text-gray-800 dark:text-gray-100">
+    <form action="{{ route('pacients.update', $pacient->id) }}" method="POST"
+        class="space-y-4 max-w-2xl text-gray-800 dark:text-gray-100">
         @csrf
         @method('PUT')
 
@@ -34,8 +36,7 @@
 
             <div>
                 <label class="block font-semibold">Contrasenya (només si vols canviar-la)</label>
-                <input type="password" name="pass"
-                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
+                <input type="password" name="pass" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
 
             <div>
@@ -124,13 +125,12 @@
         </div>
 
         <div class="flex gap-3 mt-6">
-            <button type="submit"
-                class="bg-yellow-700 hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
+            <button type="submit" class="btn-guardar">
                 💾 Guardar
             </button>
 
             <a href="{{ route('pacients.index') }}"
-               class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
+                class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
                 Cancel·lar
             </a>
         </div>

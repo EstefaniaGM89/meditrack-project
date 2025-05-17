@@ -1,3 +1,4 @@
+<!-- Controlador de Login i registre d'usuaris -->
 <?php
 
 namespace App\Http\Controllers\Auth;

@@ -1,3 +1,4 @@
+<!-- Vista de creació de personal sanitari -->
 @extends('layouts.app')
 
 @section('title', 'Afegir Personal Sanitari')
@@ -37,8 +38,7 @@
 
         <div>
             <label class="block font-semibold">Rol</label>
-            <input type="text" name="rol"
-                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white"
+            <input type="text" name="rol" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white"
                 placeholder="auxiliar, infermera, etc...">
         </div>
 
@@ -53,8 +53,7 @@
         </div>
 
         <div class="flex gap-3 mt-6">
-            <button type="submit"
-                class="bg-yellow-700 hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
+            <button type="submit" class="btn-guardar">
                 💾 Guardar
             </button>
 

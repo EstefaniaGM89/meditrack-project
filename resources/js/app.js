@@ -1,8 +1,8 @@
-// APLICAR TEMA ABANS DEL RENDER (pre-render)
+// Aplicar tema abans (per evitar flash de color)
 const html = document.documentElement;
 const isAuthPage = document.body.dataset.auth === "true";
 
-// Aplica modo dinámico solo si NO es una página de login o register
+// Aplica mode dinàmic (dark o light) si no estem a la pàgina d'autenticació
 if (!isAuthPage) {
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -12,16 +12,16 @@ if (!isAuthPage) {
     }
 }
 
-// LLIBRERIES
+// Llibreries
 import 'flowbite';
 import './bootstrap';
 import Chart from 'chart.js/auto';
 
-// INTERACCIÓ DESPRÉS DE CÀRREGA
+// Interacció després de carregar la pàgina
 document.addEventListener('DOMContentLoaded', () => {
     const checkbox = document.getElementById("checkbox");
 
-    // Splash screen de benvinguda
+    // Pantalla de benvinguda
     const splash = document.getElementById('splash');
     if (splash) {
         setTimeout(() => {
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // notificacions (quan s'implementin aquestes)
+    // Notificacions (quan s'implementin aquestes)
     const notification = document.getElementById('toastSuccess');
     if (notification) {
         setTimeout(() => {

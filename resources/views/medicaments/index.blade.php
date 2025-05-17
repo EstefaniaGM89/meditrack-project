@@ -1,3 +1,4 @@
+<!-- Vista del llistat de medicaments -->
 @extends('layouts.app')
 
 @section('title', 'Llistat de Medicaments')

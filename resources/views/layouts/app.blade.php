@@ -1,3 +1,4 @@
+<!-- Vista de Dashboard -->
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 
@@ -8,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'MediTrack')</title>
-    {{-- Script CRÍTIC per evitar parpadeo al carregar --}}
+    {{-- Script CRÍTIC per evitar parpadeix al carregar --}}
     <script>
         if (
             localStorage.theme === 'dark' ||

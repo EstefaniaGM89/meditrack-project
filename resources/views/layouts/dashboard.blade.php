@@ -1,3 +1,4 @@
+<!-- Vista de Dashboard on estan les estadístiques i informació general de l'aplicació -->
 @extends('layouts.app')
 
 @section('title', 'Dashboard')

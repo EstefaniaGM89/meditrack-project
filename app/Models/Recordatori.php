@@ -1,3 +1,4 @@
+<!-- Model per els recordatoris -->
 <?php
 
 namespace App\Models;

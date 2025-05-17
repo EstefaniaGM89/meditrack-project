@@ -1,3 +1,4 @@
+<!-- Model per personal sanitari -->
 <?php
 
 namespace App\Models;

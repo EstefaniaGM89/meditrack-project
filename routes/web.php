@@ -12,29 +12,17 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Models\{Pacient, Medicament, Recordatori};
 use App\Notifications\RecordatoriMedicament;
 
-/*
-|--------------------------------------------------------------------------
-| Rutas públicas: login y registro
-|--------------------------------------------------------------------------
-*/
+/* Rutes públiques: Login i Register */
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
 Route::get('/register', [LoginController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [LoginController::class, 'register'])->name('register.post');
 
-/*
-|--------------------------------------------------------------------------
-| Logout protegido
-|--------------------------------------------------------------------------
-*/
+/* Logout ruta protegida*/
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-/*
-|--------------------------------------------------------------------------
-| Rutas protegidas por auth
-|--------------------------------------------------------------------------
-*/
+/* Rutes protegides per auth */
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/', function () {

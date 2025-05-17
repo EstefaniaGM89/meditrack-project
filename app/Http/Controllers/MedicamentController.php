@@ -1,3 +1,4 @@
+<!-- Controlador de medicaments -->
 <?php
 
 namespace App\Http\Controllers;

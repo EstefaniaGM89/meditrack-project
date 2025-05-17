@@ -1,3 +1,4 @@
+<!-- Controlador del Dashboard -->
 <?php
 
 namespace App\Http\Controllers;

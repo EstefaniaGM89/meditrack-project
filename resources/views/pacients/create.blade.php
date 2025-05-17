@@ -1,3 +1,4 @@
+<!-- Vista de creació de pacients -->
 @extends('layouts.app')
 
 @section('title', 'Afegir Pacient')
@@ -19,38 +20,17 @@
         @csrf
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            @foreach ([
-                'Nom' => 'nom',
-                'Núm. Document' => 'num_document',
-                'Email' => 'email',
-                'Contrasenya' => 'pass',
-                'Data de naixement' => 'data_naixement',
-                'Telèfon' => 'telefon',
-                'Adreça' => 'adreca',
-                'Ciutat' => 'ciutat',
-                'Codi Postal' => 'codi_postal',
-                'Província' => 'provincia',
-                'País' => 'pais',
-                'Mètode de contacte' => 'metode_contacte'
-            ] as $label => $name)
+            @foreach (['Nom' => 'nom', 'Núm. Document' => 'num_document', 'Email' => 'email', 'Contrasenya' => 'pass', 'Data de naixement' => 'data_naixement', 'Telèfon' => 'telefon', 'Adreça' => 'adreca', 'Ciutat' => 'ciutat', 'Codi Postal' => 'codi_postal', 'Província' => 'provincia', 'País' => 'pais', 'Mètode de contacte' => 'metode_contacte'] as $label => $name)
                 <div>
                     <label class="block font-semibold">{{ $label }}</label>
                     <input
                         type="{{ in_array($name, ['email']) ? 'email' : ($name === 'pass' ? 'password' : ($name === 'data_naixement' ? 'date' : 'text')) }}"
-                        name="{{ $name }}"
-                        class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white"
-                        {{ in_array($name, ['nom', 'num_document', 'email', 'pass', 'data_naixement']) ? 'required' : '' }}>
+                        name="{{ $name }}" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" {{ in_array($name, ['nom', 'num_document', 'email', 'pass', 'data_naixement']) ? 'required' : '' }}>
                 </div>
             @endforeach
         </div>
 
-        @foreach ([
-            'Observacions' => 'observacions',
-            'Al·lèrgies' => 'alergies',
-            'Medicaments' => 'medicaments',
-            'Malalties' => 'malalties',
-            'Vacunes' => 'vacunes'
-        ] as $label => $name)
+        @foreach (['Observacions' => 'observacions', 'Al·lèrgies' => 'alergies', 'Medicaments' => 'medicaments', 'Malalties' => 'malalties', 'Vacunes' => 'vacunes'] as $label => $name)
             <div class="mt-2">
                 <label class="block font-semibold">{{ $label }}</label>
                 <textarea name="{{ $name }}" rows="2"
@@ -59,10 +39,10 @@
         @endforeach
 
         <div class="flex gap-3 mt-6">
-            <button type="submit"
-                class="bg-yellow-700 hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
+            <button type="submit" class="btn-guardar">
                 💾 Guardar
             </button>
+
             <a href="{{ route('pacients.index') }}"
                 class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded font-semibold">
                 Cancel·lar

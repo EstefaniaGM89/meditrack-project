@@ -1,3 +1,4 @@
+<!-- Vista de llistat de personal sanitari -->
 @extends('layouts.app')
 
 @section('title', 'Personal Sanitari')

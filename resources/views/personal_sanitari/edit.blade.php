@@ -1,3 +1,4 @@
+<!-- Vista d' edició de personal sanitari -->
 @extends('layouts.app')
 
 @section('title', 'Editar Personal Sanitari')
@@ -15,7 +16,8 @@
         </div>
     @endif
 
-    <form action="{{ route('personal-sanitari.update', parameters: $persona->id) }}" method="POST" class="space-y-4 max-w-md">
+    <form action="{{ route('personal-sanitari.update', parameters: $persona->id) }}" method="POST"
+        class="space-y-4 max-w-md">
         @csrf
         @method('PUT')
 
@@ -53,8 +55,7 @@
         </div>
 
         <div class="flex gap-3 mt-6">
-            <button type="submit"
-                class="bg-yellow-700 hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
+            <button type="submit" class="btn-guardar">
                 💾 Guardar
             </button>
 

@@ -1,3 +1,4 @@
+<!-- Vista de creació de recordatoris -->
 @extends('layouts.app')
 
 @section('title', 'Crear Recordatori')
@@ -78,10 +79,10 @@
         </div>
 
         <div class="flex gap-3 mt-6">
-            <button type="submit"
-                class="bg-yellow-700 hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
+            <button type="submit" class="btn-guardar">
                 💾 Guardar
             </button>
+
             <a href="{{ route('pacients.index') }}"
                 class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-green-600 text-white px-4 py-2 rounded font-semibold">
                 Cancel·lar

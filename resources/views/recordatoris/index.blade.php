@@ -1,3 +1,4 @@
+<!-- Vista de llistat de recordatoris -->
 @extends('layouts.app')
 
 @section('title', 'Recordatoris')

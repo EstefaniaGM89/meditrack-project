@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Llibreries externes */
 @import 'flowbite';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
@@ -54,6 +55,7 @@ html {
   animation: fade-in 1.5s ease-in-out;
 }
 
+/* Animació de la pantalla d'inici amb apply reutilitzant Tailwind */
 @layer components {
   .splash-screen {
     @apply fixed inset-0 z-50 flex flex-col items-center justify-center bg-white dark:bg-gray-900 transition-opacity duration-1000;
@@ -66,4 +68,8 @@ html {
   .splash-text {
     @apply text-indigo-600 dark:text-indigo-300 font-semibold text-lg animate-fade-in;
   }
+}
+
+.btn-guardar {
+  @apply bg-yellow-700 hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold;
 }

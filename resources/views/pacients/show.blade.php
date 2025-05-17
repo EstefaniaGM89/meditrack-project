@@ -1,3 +1,4 @@
+<!-- Vista per veure detalladament les dades d' un pacient -->
 @extends('layouts.app')
 
 @section('title', 'Detalls del Pacient')

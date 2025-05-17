@@ -44,10 +44,10 @@ Acceder a la aplicación desde el navegador en: http://127.0.0.1:8000/
 
 ⦁	app/Http/Controllers/ – Controladores de la lógica de negocio
 ⦁	app/Models/ – Modelos de 
-⦁   app/Notifications - Controlador de notificaciones - Implementado sin uso, para un futuro
+⦁  app/Notifications - Controlador de notificaciones - Implementado sin uso, para un futuro
 ⦁	resources/views/ – Plantillas Blade del frontend
-⦁   resources/css/ - Algunas animaciones
-⦁   resources/js/ - Scripts interactivos
+⦁  resources/css/ - estilos
+⦁  resources/js/ - Scripts interactivos
 ⦁	routes/web.php – Definición de rutas
 ⦁	database/migrations/ – Migraciones de la base de datos
 ⦁	public/ – Archivos públicos
