@@ -3,15 +3,15 @@
 @section('title', 'Iniciar Sessió')
 
 @section('content')
-    {{-- Splash screen reutilizable --}}
+    {{-- Background reutilitzable --}}
     @include('components.auth.splash')
 
     <div class="absolute inset-0 bg-black bg-opacity-30 -z-10"></div>
 
-    {{-- Formulario de login --}}
+    {{-- Formulari de login --}}
     <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-8 w-full max-w-md z-10 relative">
+        {{-- Logo reutilitzable de l'aplicació --}}
         @include('components.auth.logo')
-
 
         <h2 class="text-3xl font-extrabold mb-6 text-indigo-700 dark:text-indigo-300 text-center">🔐 Iniciar Sessió</h2>
 

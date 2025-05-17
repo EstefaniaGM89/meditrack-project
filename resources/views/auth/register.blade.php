@@ -4,17 +4,12 @@
 
 @section('content')
 
-    {{-- Fondo animado --}}
-    <div class="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
-        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-            <source src="{{ asset('videos/blob.webm') }}" type="video/webm">
-            El teu navegador no suporta vídeo HTML5.
-        </video>
-    </div>
+    {{-- Background reutilitzable --}}
+    @include('components.auth.splash')
 
     <div class="absolute inset-0 bg-black bg-opacity-30 -z-10"></div>
 
-    {{-- Formulario de registro --}}
+    {{-- Formulari de registre --}}
     <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-8 w-full max-w-md z-10 relative">
         @include('components.auth.logo')
 
@@ -35,29 +30,28 @@
             <div>
                 <label class="block text-gray-700 dark:text-gray-300 font-semibold">Nom</label>
                 <input type="text" name="name" required value="{{ old('name') }}"
-                       class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
+                    class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
             </div>
 
             <div>
                 <label class="block text-gray-700 dark:text-gray-300 font-semibold">Email</label>
                 <input type="email" name="email" required value="{{ old('email') }}"
-                       class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
+                    class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
             </div>
 
             <div>
                 <label class="block text-gray-700 dark:text-gray-300 font-semibold">Contrasenya</label>
                 <input type="password" name="password" required
-                       class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
+                    class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
             </div>
 
             <div>
                 <label class="block text-gray-700 dark:text-gray-300 font-semibold">Confirma la Contrasenya</label>
                 <input type="password" name="password_confirmation" required
-                       class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
+                    class="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:text-white">
             </div>
 
-            <button type="submit"
-                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full font-semibold">
+            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full font-semibold">
                 Registrar-se
             </button>
         </form>
