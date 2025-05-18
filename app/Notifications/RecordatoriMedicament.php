@@ -1,4 +1,3 @@
-<!-- Notificació per a l'enviament de recordatoris de medicaments (no implementat) -->
 <?php
 
 namespace App\Notifications;

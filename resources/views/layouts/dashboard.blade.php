@@ -73,7 +73,16 @@
             @if ($lastRecordatori)
                 <p class="text-gray-700">📩 Missatge: <strong>{{ $lastRecordatori->missatge }}</strong></p>
                 <p class="text-gray-700">👤 Pacient: <strong>{{ $lastRecordatori->pacient->nom ?? '—' }}</strong></p>
-                <p class="text-gray-700">💊 Medicament: <strong>{{ $lastRecordatori->medicament->nom ?? '—' }}</strong></p>
+                <p class="text-gray-700">
+                    💊 Medicament:
+                    <strong>
+                        {{ $lastRecordatori->medicament->nom ?? '—' }}
+                        @if ($lastRecordatori->medicament && $lastRecordatori->medicament->dosi)
+                            ({{ $lastRecordatori->medicament->dosi }})
+                        @endif
+                    </strong>
+                </p>
+
             @else
                 <p class="text-gray-600">Encara no hi ha recordatoris creats.</p>
             @endif

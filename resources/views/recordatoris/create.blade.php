@@ -24,7 +24,7 @@
             <select name="pacient_id" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
                 <option value="">-- Selecciona un pacient --</option>
                 @foreach($pacients as $pacient)
-                    <option value="{{ $pacient->id }}">{{ $pacient->nom }}</option>
+                    <option value="{{ $pacient->id }}">{{ $pacient->nom }} {{ $pacient->cognoms }}</option>
                 @endforeach
             </select>
         </div>
@@ -34,7 +34,7 @@
             <select name="medicament_id" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
                 <option value="">-- Selecciona un medicament --</option>
                 @foreach($medicaments as $medicament)
-                    <option value="{{ $medicament->id }}">{{ $medicament->nom }}</option>
+                    <option value="{{ $medicament->id }}">{{ $medicament->nom }} {{ $medicament->dosi}}</option>
                 @endforeach
             </select>
         </div>
