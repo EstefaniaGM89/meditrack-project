@@ -58,9 +58,10 @@
             class="p-6 rounded-2xl shadow-md border border-purple-100 bg-purple-50 hover:shadow-lg transition hover:scale-[1.02] duration-300">
             <h3 class="text-lg font-semibold text-purple-800 mb-3">📌 Últim pacient registrat</h3>
             @if ($lastPacient)
-                <p class="text-gray-700">👤 <strong>{{ $lastPacient->nom }}</strong></p>
+                <p class="text-gray-700">👤 <strong>{{ $lastPacient->nom }} {{ $lastPacient->cognoms }}</strong></p>
                 <p class="text-gray-700">📧 {{ $lastPacient->email }}</p>
-                <p class="text-gray-700">🎂 {{ $lastPacient->data_naixement }}</p>
+                <p class="text-gray-700">🎂 {{ \Carbon\Carbon::parse($lastPacient->data_naixement)->format('d/m/Y') }}</p>
+                <p class="text-gray-700">📞 {{ $lastPacient->telefon }}</p>
             @else
                 <p class="text-gray-600">Encara no hi ha pacients registrats.</p>
             @endif
@@ -71,8 +72,14 @@
             class="p-6 rounded-2xl shadow-md border border-orange-100 bg-orange-50 hover:shadow-lg transition hover:scale-[1.02] duration-300">
             <h3 class="text-lg font-semibold text-orange-800 mb-3">🕰️ Últim recordatori creat</h3>
             @if ($lastRecordatori)
+                <p class="text-gray-700">
+                    👤 Pacient:
+                    <strong>
+                        {{ $lastRecordatori->pacient->nom ?? '—' }}
+                        {{ $lastRecordatori->pacient->cognoms ?? '' }}
+                    </strong>
+                </p>
                 <p class="text-gray-700">📩 Missatge: <strong>{{ $lastRecordatori->missatge }}</strong></p>
-                <p class="text-gray-700">👤 Pacient: <strong>{{ $lastRecordatori->pacient->nom ?? '—' }}</strong></p>
                 <p class="text-gray-700">
                     💊 Medicament:
                     <strong>
