@@ -26,20 +26,23 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/', function () {
-        $pacientsCount = Pacient::count();
-        $medicamentsCount = Medicament::count();
-        $recordatorisCount = Recordatori::count();
-        $lastPacient = Pacient::latest()->first();
-        $lastRecordatori = Recordatori::with(['pacient', 'medicament'])->latest()->first();
+        $pacientsCount = \App\Models\Pacient::count();
+        $medicamentsCount = \App\Models\Medicament::count();
+        $recordatorisCount = \App\Models\Recordatori::count();
+        $lastPacient = \App\Models\Pacient::latest()->first();
+        $lastRecordatori = \App\Models\Recordatori::with(['pacient', 'medicament'])->latest()->first();
+        $recordatorisPendents = \App\Models\Recordatori::where('estat', 'pendent')->get();
 
         return view('layouts.dashboard', compact(
             'pacientsCount',
             'medicamentsCount',
             'recordatorisCount',
             'lastPacient',
-            'lastRecordatori'
+            'lastRecordatori',
+            'recordatorisPendents'
         ));
     })->name('dashboard');
+
 
     Route::resource('pacients', PacientController::class);
     Route::resource('medicaments', MedicamentController::class);

@@ -14,7 +14,7 @@ class RecordatoriController extends Controller
     {
         $query = Recordatori::with(['pacient', 'medicament']);
 
-        // Filtrar per nom del pacient si hi ha cerca
+        // 🔎 Filtrar per nom del pacient si hi ha cerca
         if ($request->filled('search')) {
             $search = $request->search;
             $query->whereHas('pacient', function ($q) use ($search) {
@@ -22,7 +22,12 @@ class RecordatoriController extends Controller
             });
         }
 
-        // Ordenació dinàmica
+        // 🟡 Nou: Filtrar només pendents si ve del dashboard o botó lateral
+        if ($request->filled('filtre') && $request->filtre === 'pendents') {
+            $query->where('estat', 'pendent');
+        }
+
+        // 🔃 Ordenació dinàmica
         $sort = $request->get('sort', 'recent');
 
         switch ($sort) {

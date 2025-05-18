@@ -97,3 +97,15 @@ html {
 .btn-guardar {
   @apply bg-yellow-700 hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold;
 }
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.animate-bounce {
+  animation: bounce 1s infinite;
+}

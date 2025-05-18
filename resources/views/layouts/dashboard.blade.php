@@ -10,13 +10,13 @@
             <span>Benvingut/da a <span class="text-indigo-500 dark:text-indigo-300">MediTrack</span></span>
             <span class="inline-block text-3xl animate-wiggle">👋</span>
         </h2>
-    
+
         <p class="mt-2 text-indigo-700 dark:text-indigo-300 font-semibold">
             Sessió iniciada com: {{ Auth::user()->name }}
         </p>
     </div>
 
-        <div class="grid 'sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid 'sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Pacients -->
         <div
             class="p-6 rounded-2xl shadow-md border border-indigo-100 bg-indigo-50 hover:shadow-lg transition hover:scale-[1.02] duration-300">
@@ -69,7 +69,7 @@
         <!-- Últim recordatori -->
         <div
             class="p-6 rounded-2xl shadow-md border border-orange-100 bg-orange-50 hover:shadow-lg transition hover:scale-[1.02] duration-300">
-            <h3 class="text-lg font-semibold text-orange-800 mb-3">🔔 Últim recordatori creat</h3>
+            <h3 class="text-lg font-semibold text-orange-800 mb-3">🕰️ Últim recordatori creat</h3>
             @if ($lastRecordatori)
                 <p class="text-gray-700">📩 Missatge: <strong>{{ $lastRecordatori->missatge }}</strong></p>
                 <p class="text-gray-700">👤 Pacient: <strong>{{ $lastRecordatori->pacient->nom ?? '—' }}</strong></p>
@@ -78,5 +78,21 @@
                 <p class="text-gray-600">Encara no hi ha recordatoris creats.</p>
             @endif
         </div>
+        <!-- Recordatoris pendents -->
+        <div
+            class="p-6 rounded-2xl shadow-md border border-yellow-300 bg-yellow-100 hover:shadow-lg transition hover:scale-[1.02] duration-300">
+            <div class="flex items-center justify-between mb-2">
+                <h3 class="text-lg font-semibold text-yellow-800">🔔 Notificacions pendents</h3>
+                <span class="bg-yellow-300 text-yellow-900 px-2 py-1 rounded-full text-sm">
+                    {{ $recordatorisPendents->count() }}
+                </span>
+            </div>
+            <p class="text-gray-700">Preses i administració de tractaments pendents</p>
+            <a href="{{ route('recordatoris.index', ['filtre' => 'pendents']) }}"
+                class="text-yellow-800 font-medium hover:underline mt-4 inline-block">Veure pendents d'administrar</a>
+        </div>
+
     </div>
+
+
 @endsection

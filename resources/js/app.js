@@ -19,6 +19,7 @@ import Chart from 'chart.js/auto';
 
 // Interacció després de carregar la pàgina
 document.addEventListener('DOMContentLoaded', () => {
+    
     const checkbox = document.getElementById("checkbox");
 
     // Pantalla de benvinguda
