@@ -14,6 +14,7 @@ class PersonalSanitari extends Authenticatable
 
     protected $fillable = [
         'nom',
+        'cognoms',
         'rol',
         'email',
         'password',

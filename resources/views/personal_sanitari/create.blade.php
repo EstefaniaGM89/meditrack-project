@@ -26,6 +26,10 @@
         </div>
 
         <div>
+            <label class="block font-semibold">Cognoms</label>
+            <input type="text" name="cognoms" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
+        </div>
+        <div>
             <label class="block font-semibold">Email</label>
             <input type="email" name="email" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
         </div>

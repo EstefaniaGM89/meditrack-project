@@ -11,19 +11,25 @@ class PersonalSanitariController extends Controller
     {
         $query = PersonalSanitari::query();
 
+        // 🔍 Filtrar per nom, cognoms o rol
         if ($request->filled('search')) {
-            $query->where('nom', 'like', '%' . $request->search . '%');
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nom', 'like', "%$search%")
+                  ->orWhere('cognoms', 'like', "%$search%")
+                  ->orWhere('rol', 'like', "%$search%");
+            });
         }
 
-        // Ordenació dinàmica
+        // 🔃 Ordenació
         $sort = $request->get('sort', 'recent');
 
         switch ($sort) {
             case 'alphabetical':
-                $query->orderBy('nom', 'asc');
+                $query->orderBy('nom')->orderBy('cognoms');
                 break;
             case 'reverse':
-                $query->orderBy('nom', 'desc');
+                $query->orderByDesc('nom')->orderByDesc('cognoms');
                 break;
             case 'oldest':
                 $query->orderBy('created_at', 'asc');
@@ -48,6 +54,7 @@ class PersonalSanitariController extends Controller
     {
         $request->validate([
             'nom' => 'required|string|max:255',
+            'cognoms' => 'required|string|max:255',
             'email' => 'required|email|unique:personal_sanitari',
             'rol' => 'nullable|string|max:50',
             'torn' => 'required|in:dia,nit,irrellevant',
@@ -71,13 +78,14 @@ class PersonalSanitariController extends Controller
     {
         $request->validate([
             'nom' => 'required|string|max:255',
+            'cognoms' => 'required|string|max:255',
             'email' => 'required|email|unique:personal_sanitari,email,' . $personal_sanitari->id,
             'rol' => 'required|string|max:50',
             'torn' => 'required|in:dia,nit,irrellevant',
             'password' => 'nullable|string|min:4',
         ]);
 
-        $data = $request->only(['nom', 'email', 'rol', 'torn']);
+        $data = $request->only(['nom', 'cognoms', 'email', 'rol', 'torn']);
 
         if ($request->filled('password')) {
             $data['password'] = bcrypt($request->password);

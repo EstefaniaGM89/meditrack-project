@@ -1,4 +1,3 @@
-<!-- Vista de llistat de personal sanitari -->
 @extends('layouts.app')
 
 @section('title', 'Personal Sanitari')
@@ -12,8 +11,9 @@
     </a>
 
     <!-- 🔍 Barra de cerca + ordenació -->
-    <form method="GET" action="{{ route('personal-sanitari.index') }}" class="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
-        <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom..."
+    <form method="GET" action="{{ route('personal-sanitari.index') }}"
+        class="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom, cognom, o rol..."
             class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500">
         <button type="submit"
             class="px-4 py-2 bg-indigo-500 dark:bg-indigo-600 text-white rounded hover:bg-indigo-600 dark:hover:bg-indigo-500 transition">
@@ -25,7 +25,6 @@
             <option value="alphabetical" {{ request('sort') == 'alphabetical' ? 'selected' : '' }}>🔤 A-Z</option>
             <option value="reverse" {{ request('sort') == 'reverse' ? 'selected' : '' }}>🔠 Z-A</option>
         </select>
-
     </form>
 
     <div class="flex-1 overflow-x-auto">
@@ -34,6 +33,7 @@
             <thead class="bg-indigo-300 dark:bg-indigo-600">
                 <tr>
                     <th class="px-4 py-2 text-left">Nom</th>
+                    <th class="px-4 py-2 text-left">Cognoms</th>
                     <th class="px-4 py-2 text-left">Email</th>
                     <th class="px-4 py-2 text-left">Rol</th>
                     <th class="px-4 py-2 text-left">Torn</th>
@@ -44,6 +44,7 @@
                 @forelse($personal as $persona)
                     <tr class="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
                         <td class="px-4 py-2">{{ $persona->nom }}</td>
+                        <td class="px-4 py-2">{{ $persona->cognoms }}</td>
                         <td class="px-4 py-2">{{ $persona->email }}</td>
                         <td class="px-4 py-2">{{ $persona->rol ?? '-' }}</td>
                         <td class="px-4 py-2">{{ $persona->torn ?? '-' }}</td>
@@ -70,12 +71,16 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="text-center text-gray-500 dark:text-gray-400 py-4">
+                        <td colspan="6" class="text-center text-gray-500 dark:text-gray-400 py-4">
                             No hi ha personal registrat.
                         </td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
+    </div>
+
+    <div class="mt-4">
+        {{ $personal->appends(request()->only(['search', 'sort']))->links() }}
     </div>
 @endsection
