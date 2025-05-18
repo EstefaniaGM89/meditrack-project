@@ -28,6 +28,7 @@
                 @foreach($pacients as $pacient)
                     <option value="{{ $pacient->id }}" {{ $recordatori->pacient_id == $pacient->id ? 'selected' : '' }}>
                         {{ $pacient->nom }}
+                        {{ $pacient->cognoms }}
                     </option>
                 @endforeach
             </select>
@@ -41,6 +42,7 @@
                 @foreach($medicaments as $medicament)
                     <option value="{{ $medicament->id }}" {{ $recordatori->medicament_id == $medicament->id ? 'selected' : '' }}>
                         {{ $medicament->nom }}
+                        {{ $medicament->dosi }}
                     </option>
                 @endforeach
             </select>

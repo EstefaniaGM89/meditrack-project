@@ -14,28 +14,44 @@ class RecordatoriController extends Controller
     {
         $query = Recordatori::with(['pacient', 'medicament']);
 
-        // 🔎 Filtrar per nom del pacient si hi ha cerca
+        // 🔎 Cerca per nom o cognoms del pacient
         if ($request->filled('search')) {
             $search = $request->search;
             $query->whereHas('pacient', function ($q) use ($search) {
-                $q->where('nom', 'like', '%' . $search . '%');
+                $q->where('nom', 'like', "%$search%")
+                    ->orWhere('cognoms', 'like', "%$search%");
             });
         }
 
-        // 🟡 Nou: Filtrar només pendents si ve del dashboard o botó lateral
+        // 🟡 Filtrar només pendents si s'ha sol·licitat
         if ($request->filled('filtre') && $request->filtre === 'pendents') {
             $query->where('estat', 'pendent');
         }
 
         // 🔃 Ordenació dinàmica
         $sort = $request->get('sort', 'recent');
-
         switch ($sort) {
             case 'alphabetical':
-                $query->orderBy(Pacient::select('nom')->whereColumn('pacients.id', 'recordatoris.pacient_id'), 'asc');
+                $query->orderBy(
+                    Pacient::select('nom')
+                        ->whereColumn('pacients.id', 'recordatoris.pacient_id'),
+                    'asc'
+                )->orderBy(
+                        Pacient::select('cognoms')
+                            ->whereColumn('pacients.id', 'recordatoris.pacient_id'),
+                        'asc'
+                    );
                 break;
             case 'reverse':
-                $query->orderBy(Pacient::select('nom')->whereColumn('pacients.id', 'recordatoris.pacient_id'), 'desc');
+                $query->orderBy(
+                    Pacient::select('nom')
+                        ->whereColumn('pacients.id', 'recordatoris.pacient_id'),
+                    'desc'
+                )->orderBy(
+                        Pacient::select('cognoms')
+                            ->whereColumn('pacients.id', 'recordatoris.pacient_id'),
+                        'desc'
+                    );
                 break;
             case 'oldest':
                 $query->orderBy('created_at', 'asc');

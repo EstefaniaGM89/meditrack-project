@@ -14,7 +14,7 @@
     <!-- 🔍 Barra de cerca + ordenació -->
     <form method="GET" action="{{ route('recordatoris.index') }}"
         class="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
-        <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom..."
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom o cognoms..."
             class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500">
         <button type="submit"
             class="px-4 py-2 bg-indigo-500 dark:bg-indigo-600 text-white rounded hover:bg-indigo-600 dark:hover:bg-indigo-500 transition">
@@ -26,7 +26,6 @@
             <option value="alphabetical" {{ request('sort') == 'alphabetical' ? 'selected' : '' }}>🔤 A-Z</option>
             <option value="reverse" {{ request('sort') == 'reverse' ? 'selected' : '' }}>🔠 Z-A</option>
         </select>
-
     </form>
 
     <div class="overflow-x-auto">
@@ -34,8 +33,9 @@
             class="min-w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow text-sm text-gray-800 dark:text-gray-100">
             <thead class="bg-indigo-300 dark:bg-indigo-600">
                 <tr>
-                    <th class="px-4 py-2 text-left">Pacient</th>
-                    <th class="px-4 py-2 text-left">Medicaments</th>
+                    <th class="px-4 py-2 text-left">Nom</th>
+                    <th class="px-4 py-2 text-left">Cognoms</th>
+                    <th class="px-4 py-2 text-left">Medicament</th>
                     <th class="px-4 py-2 text-left">Missatge</th>
                     <th class="px-4 py-2 text-left">Data - Hora</th>
                     <th class="px-4 py-2 text-left">Estat</th>
@@ -46,7 +46,13 @@
                 @forelse($recordatoris as $recordatori)
                     <tr class="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
                         <td class="px-4 py-2">{{ $recordatori->pacient->nom ?? '—' }}</td>
-                        <td class="px-4 py-2">{{ $recordatori->medicament->nom ?? '—' }}</td>
+                        <td class="px-4 py-2">{{ $recordatori->pacient->cognoms ?? '—' }}</td>
+                        <td class="px-4 py-2">
+                            {{ $recordatori->medicament->nom ?? '—' }}
+                            @if ($recordatori->medicament->dosi)
+                                ({{ $recordatori->medicament->dosi }})
+                            @endif
+                        </td>
                         <td class="px-4 py-2">{{ $recordatori->missatge }}</td>
                         <td class="px-4 py-2">
                             {{ \Carbon\Carbon::parse($recordatori->hora)->format('d/m/Y - H:i') }}
