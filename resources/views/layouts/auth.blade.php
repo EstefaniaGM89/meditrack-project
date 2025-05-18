@@ -1,6 +1,6 @@
 <!-- Vista de plantilla del layout d'autenticació -->
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth dark"> {{-- Modo oscuro siempre activado --}}
+<html lang="es" class="scroll-smooth dark"> {{-- Mode dark sempre activat --}}
 
 <head>
     <meta charset="UTF-8">

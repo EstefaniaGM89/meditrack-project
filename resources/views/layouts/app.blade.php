@@ -33,7 +33,10 @@
             <h1 class="text-2xl font-bold">MediTrack</h1>
         </div>
 
+        
         <div class="flex items-center gap-4">
+            
+            <!-- Mode Dark -->
             <input type="checkbox" class="checkbox hidden" id="checkbox">
             <label for="checkbox"
                 class="checkbox-label cursor-pointer bg-gray-800 dark:bg-gray-200 w-12 h-6 rounded-full flex items-center justify-between px-1 relative">
