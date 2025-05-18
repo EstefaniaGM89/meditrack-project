@@ -11,19 +11,24 @@ class PacientController extends Controller
     public function index(Request $request)
     {
         $sort = $request->get('sort', 'recent'); // Valor per defecte
-
         $query = Pacient::query();
 
+        // 🔍 Cerca per nom o cognoms
         if ($request->filled('search')) {
-            $query->where('nom', 'like', '%' . $request->search . '%');
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nom', 'like', '%' . $search . '%')
+                    ->orWhere('cognoms', 'like', '%' . $search . '%');
+            });
         }
 
+        // 🧭 Ordenació
         switch ($sort) {
             case 'alphabetical':
-                $query->orderBy('nom', 'asc');
+                $query->orderBy('nom')->orderBy('cognoms');
                 break;
             case 'reverse':
-                $query->orderBy('nom', 'desc');
+                $query->orderByDesc('nom')->orderByDesc('cognoms');
                 break;
             case 'oldest':
                 $query->orderBy('created_at', 'asc');
@@ -34,6 +39,7 @@ class PacientController extends Controller
                 break;
         }
 
+        // 📄 Resultats paginats
         $pacients = $query->paginate(10);
 
         return view('pacients.index', compact('pacients', 'sort'));

@@ -12,7 +12,7 @@
 
     <!-- 🔍 Barra de cerca + ordenació -->
     <form method="GET" action="{{ route('pacients.index') }}" class="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
-        <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom..."
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom o cognoms..."
             class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500">
         <button type="submit"
             class="px-4 py-2 bg-indigo-500 dark:bg-indigo-600 text-white rounded hover:bg-indigo-600 dark:hover:bg-indigo-500 transition">
@@ -24,7 +24,6 @@
             <option value="alphabetical" {{ request('sort') == 'alphabetical' ? 'selected' : '' }}>🔤 A-Z</option>
             <option value="reverse" {{ request('sort') == 'reverse' ? 'selected' : '' }}>🔠 Z-A</option>
         </select>
-
     </form>
 
     <div class="overflow-x-auto">
