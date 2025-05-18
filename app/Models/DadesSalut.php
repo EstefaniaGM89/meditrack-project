@@ -1,4 +1,3 @@
-<!-- Model per les dades de salut (sense implementar) -->
 <?php
 
 namespace App\Models;

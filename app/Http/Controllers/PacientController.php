@@ -1,4 +1,3 @@
-<!-- Controlador dels pacients -->
 <?php
 
 namespace App\Http\Controllers;
@@ -11,15 +10,33 @@ class PacientController extends Controller
 {
     public function index(Request $request)
     {
+        $sort = $request->get('sort', 'recent'); // Valor per defecte
+
         $query = Pacient::query();
 
         if ($request->filled('search')) {
             $query->where('nom', 'like', '%' . $request->search . '%');
         }
 
-        $pacients = $query->orderBy('nom')->paginate(10);
+        switch ($sort) {
+            case 'alphabetical':
+                $query->orderBy('nom', 'asc');
+                break;
+            case 'reverse':
+                $query->orderBy('nom', 'desc');
+                break;
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'recent':
+            default:
+                $query->orderBy('created_at', 'desc');
+                break;
+        }
 
-        return view('pacients.index', compact('pacients'));
+        $pacients = $query->paginate(10);
+
+        return view('pacients.index', compact('pacients', 'sort'));
     }
 
     public function create()
@@ -47,16 +64,6 @@ class PacientController extends Controller
             'antecedents' => 'nullable|string',
             'vacunes' => 'nullable|string',
             'metode_contacte' => 'nullable|string|max:100',
-        ], [
-            'nom.required' => 'Has d’introduir un nom.',
-            'email.required' => 'Has d’introduir un correu electrònic.',
-            'email.email' => 'El correu electrònic no és vàlid.',
-            'email.unique' => 'Aquest correu electrònic ja està registrat.',
-            'pass.required' => 'Has d’introduir una contrasenya.',
-            'pass.min' => 'La contrasenya ha de tenir almenys :min caràcters.',
-            'data_naixement.required' => 'Has d’introduir la data de naixement.',
-            'data_naixement.date' => 'La data de naixement no és vàlida.',
-            'num_document.unique' => 'El número de document ja està registrat.',
         ]);
 
         $request['pass'] = Hash::make($request['pass']);
@@ -64,7 +71,6 @@ class PacientController extends Controller
 
         return redirect()->route('pacients.index')->with('success', 'Pacient creat correctament.');
     }
-
 
     public function show($id)
     {
@@ -98,15 +104,6 @@ class PacientController extends Controller
             'antecedents' => 'nullable|string',
             'vacunes' => 'nullable|string',
             'metode_contacte' => 'nullable|string|max:100',
-        ], [
-            'nom.required' => 'Has d’introduir un nom.',
-            'email.required' => 'Has d’introduir un correu electrònic.',
-            'email.email' => 'El correu electrònic no és vàlid.',
-            'email.unique' => 'Aquest correu electrònic ja està registrat.',
-            'pass.min' => 'La contrasenya ha de tenir almenys :min caràcters.',
-            'data_naixement.required' => 'Has d’introduir la data de naixement.',
-            'data_naixement.date' => 'La data de naixement no és vàlida.',
-            'num_document.unique' => 'El número de document ja està registrat.',
         ]);
 
         $pacient = Pacient::findOrFail($id);

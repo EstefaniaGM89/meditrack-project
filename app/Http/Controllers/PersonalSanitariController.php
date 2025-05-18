@@ -1,4 +1,3 @@
-<!-- Controlador del personal sanitari -->
 <?php
 
 namespace App\Http\Controllers;
@@ -16,9 +15,28 @@ class PersonalSanitariController extends Controller
             $query->where('nom', 'like', '%' . $request->search . '%');
         }
 
-        $personal = $query->orderBy('nom')->get();
+        // Ordenació dinàmica
+        $sort = $request->get('sort', 'recent');
 
-        return view('personal_sanitari.index', compact('personal'));
+        switch ($sort) {
+            case 'alphabetical':
+                $query->orderBy('nom', 'asc');
+                break;
+            case 'reverse':
+                $query->orderBy('nom', 'desc');
+                break;
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'recent':
+            default:
+                $query->orderBy('created_at', 'desc');
+                break;
+        }
+
+        $personal = $query->paginate(10);
+
+        return view('personal_sanitari.index', compact('personal', 'sort'));
     }
 
     public function create()

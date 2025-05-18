@@ -1,4 +1,3 @@
-<!-- Controlador de recordatoris -->
 <?php
 
 namespace App\Http\Controllers;
@@ -15,17 +14,36 @@ class RecordatoriController extends Controller
     {
         $query = Recordatori::with(['pacient', 'medicament']);
 
-        // Opcional: filtrar per nom del pacient si hi ha cerca
-        if ($request->has('search') && !empty($request->search)) {
+        // Filtrar per nom del pacient si hi ha cerca
+        if ($request->filled('search')) {
             $search = $request->search;
             $query->whereHas('pacient', function ($q) use ($search) {
                 $q->where('nom', 'like', '%' . $search . '%');
             });
         }
 
-        $recordatoris = $query->orderByDesc('id')->paginate(10);
+        // Ordenació dinàmica
+        $sort = $request->get('sort', 'recent');
 
-        return view('recordatoris.index', compact('recordatoris'));
+        switch ($sort) {
+            case 'alphabetical':
+                $query->orderBy(Pacient::select('nom')->whereColumn('pacients.id', 'recordatoris.pacient_id'), 'asc');
+                break;
+            case 'reverse':
+                $query->orderBy(Pacient::select('nom')->whereColumn('pacients.id', 'recordatoris.pacient_id'), 'desc');
+                break;
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'recent':
+            default:
+                $query->orderBy('created_at', 'desc');
+                break;
+        }
+
+        $recordatoris = $query->paginate(10);
+
+        return view('recordatoris.index', compact('recordatoris', 'sort'));
     }
 
     public function create()
@@ -48,6 +66,10 @@ class RecordatoriController extends Controller
             'dies_setmana' => 'nullable|array',
             'dies_setmana.*' => 'in:Dilluns,Dimarts,Dimecres,Dijous,Divendres,Dissabte,Diumenge',
         ]);
+
+        if (isset($validated['dies_setmana'])) {
+            $validated['dies_setmana'] = json_encode($validated['dies_setmana']);
+        }
 
         $recordatori = Recordatori::create($validated);
 

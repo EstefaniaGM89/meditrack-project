@@ -1,4 +1,3 @@
-<!-- Model per enregistrar usuaris -->
 <?php
 
 namespace App\Models;

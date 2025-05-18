@@ -1,4 +1,3 @@
-<!-- Controlador de medicaments -->
 <?php
 
 namespace App\Http\Controllers;
@@ -10,15 +9,33 @@ class MedicamentController extends Controller
 {
     public function index(Request $request)
     {
+        $sort = $request->get('sort', 'recent');
+
         $query = Medicament::query();
 
         if ($request->filled('search')) {
             $query->where('nom', 'like', '%' . $request->search . '%');
         }
 
-        $medicaments = $query->orderBy('nom')->get();
+        switch ($sort) {
+            case 'alphabetical':
+                $query->orderBy('nom', 'asc');
+                break;
+            case 'reverse':
+                $query->orderBy('nom', 'desc');
+                break;
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'recent':
+            default:
+                $query->orderBy('created_at', 'desc');
+                break;
+        }
 
-        return view('medicaments.index', compact('medicaments'));
+        $medicaments = $query->paginate(10);
+
+        return view('medicaments.index', compact('medicaments', 'sort'));
     }
 
     public function create()

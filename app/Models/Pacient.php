@@ -1,4 +1,3 @@
-<!-- Model per els pacients -->
 <?php
 
 namespace App\Models;

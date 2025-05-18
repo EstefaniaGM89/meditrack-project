@@ -55,7 +55,19 @@ html {
   animation: fade-in 1.5s ease-in-out;
 }
 
-/* Animació de la pantalla d'inici amb apply reutilitzant Tailwind */
+/* Animació de cor bategant per logos */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); }
+}
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* Splash screen reutilitzant Tailwind */
 @layer components {
   .splash-screen {
     @apply fixed inset-0 z-50 flex flex-col items-center justify-center bg-white dark:bg-gray-900 transition-opacity duration-1000;
@@ -70,6 +82,18 @@ html {
   }
 }
 
+/* Botó guardar */
+@layer components {
+  .btn-guardar {
+    @apply bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold;
+  }
+
+  .select-filtro {
+    @apply bg-white dark:bg-gray-800 text-black dark:text-white border border-gray-300 dark:border-gray-600 rounded-md p-2;
+  }
+}
+
+/* Correcció d'estil duplicat */
 .btn-guardar {
   @apply bg-yellow-700 hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold;
 }

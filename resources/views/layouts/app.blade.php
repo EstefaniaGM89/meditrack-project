@@ -27,19 +27,9 @@
     <!-- Header -->
     <header class="bg-indigo-600 text-white p-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
-            <!-- Càpsula bategant -->
-            <svg class="w-7 h-7 animate-heartbeat transition duration-300" viewBox="0 0 64 64"
-                xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <clipPath id="capsule-clip">
-                        <rect x="8" y="8" width="48" height="48" rx="24" transform="rotate(45 32 32)" />
-                    </clipPath>
-                </defs>
-                <g clip-path="url(#capsule-clip)">
-                    <rect x="0" y="0" width="64" height="64" fill="#3b82f6" />
-                    <rect x="32" y="0" width="32" height="64" fill="#ef4444" />
-                </g>
-            </svg>
+            <!-- Logo bategant -->
+            <img src="{{ asset('images/meditrack-logo2.png') }}" alt="MediTrack Logo"
+                class="w-9 h-9 animate-heartbeat transition duration-300">
             <h1 class="text-2xl font-bold">MediTrack</h1>
         </div>
 
@@ -59,8 +49,8 @@
                 🔓 Tancar Sessió
             </button>
         </form>
-
     </header>
+
 
     <!-- Contenidor principal: Sidebar + Contingut -->
     <div class="flex flex-1">

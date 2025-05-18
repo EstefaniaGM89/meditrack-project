@@ -4,32 +4,34 @@
 @section('title', 'Recordatoris')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">⏰ Llistat de Recordatoris</h2>
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">⏰ Recordatoris</h2>
 
     <a href="{{ route('recordatoris.create') }}"
         class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 mb-4 inline-block">
         ➕ Nou Recordatori
     </a>
 
-    <!-- 🔍 Barra de cerca -->
-    <form method="GET" action="{{ route('recordatoris.index') }}" class="mb-6">
-        <div class="flex flex-col sm:flex-row gap-4 items-center">
-            <input
-                type="text"
-                name="search"
-                value="{{ request('search') }}"
-                placeholder="Filtrar per nom..."
-                class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-b-2 focus:border-indigo-400 focus:shadow-none bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 placeholder-opacity-80 italic"
-            >
-            <button type="submit" class="px-4 py-2 bg-indigo-300 dark:bg-indigo-600 text-white rounded transition
-               hover:bg-indigo-400 dark:hover:bg-indigo-500">
-                🔍
-            </button>
-        </div>
+    <!-- 🔍 Barra de cerca + ordenació -->
+    <form method="GET" action="{{ route('recordatoris.index') }}"
+        class="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom..."
+            class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500">
+        <button type="submit"
+            class="px-4 py-2 bg-indigo-500 dark:bg-indigo-600 text-white rounded hover:bg-indigo-600 dark:hover:bg-indigo-500 transition">
+            🔍
+        </button>
+        <select name="sort" onchange="this.form.submit()" class="select-filtro">
+            <option value="recent" {{ request('sort') == 'recent' ? 'selected' : '' }}>📅 Més recents</option>
+            <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>📅 Més antics</option>
+            <option value="alphabetical" {{ request('sort') == 'alphabetical' ? 'selected' : '' }}>🔤 A-Z</option>
+            <option value="reverse" {{ request('sort') == 'reverse' ? 'selected' : '' }}>🔠 Z-A</option>
+        </select>
+
     </form>
 
     <div class="overflow-x-auto">
-        <table class="min-w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow text-sm text-gray-800 dark:text-gray-100">
+        <table
+            class="min-w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow text-sm text-gray-800 dark:text-gray-100">
             <thead class="bg-indigo-300 dark:bg-indigo-600">
                 <tr>
                     <th class="px-4 py-2 text-left">Pacient</th>
