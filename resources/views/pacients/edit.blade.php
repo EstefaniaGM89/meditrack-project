@@ -29,14 +29,24 @@
             </div>
 
             <div>
-                <label class="block font-semibold">Email</label>
-                <input type="email" name="email" value="{{ old('email', $pacient->email) }}"
+                <label class="block font-semibold">Cognoms</label>
+                <input type="text" name="cognoms" value="{{ old('cognoms', $pacient->cognoms) }}"
                     class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
             </div>
 
             <div>
-                <label class="block font-semibold">Contrasenya (només si vols canviar-la)</label>
-                <input type="password" name="pass" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
+                <label class="block font-semibold">Gènere</label>
+                <select name="genere" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
+                    <option value="">-- Selecciona gènere --</option>
+                    <option value="Home" @if(old('genere', $pacient->genere) == 'Home') selected @endif>Home</option>
+                    <option value="Dona" @if(old('genere', $pacient->genere) == 'Dona') selected @endif>Dona</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block font-semibold">Email</label>
+                <input type="email" name="email" value="{{ old('email', $pacient->email) }}"
+                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
             </div>
 
             <div>
@@ -68,6 +78,7 @@
                 <input type="text" name="codi_postal" value="{{ old('codi_postal', $pacient->codi_postal) }}"
                     class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
+
             <div>
                 <label class="block font-semibold text-gray-700 dark:text-gray-300">Província</label>
                 <select name="provincia" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
@@ -126,7 +137,6 @@
                         ];
                         $provinciaSeleccionada = old('provincia', $pacient->provincia ?? '');
                     @endphp
-
                     <option value="">-- Selecciona una província --</option>
                     @foreach ($provincies as $provincia)
                         <option value="{{ $provincia }}" @if($provincia == $provinciaSeleccionada) selected @endif>

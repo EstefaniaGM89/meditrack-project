@@ -10,6 +10,7 @@
             <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
                 👥 Pacient
                 <span class="text-indigo-600 dark:text-indigo-400 font-semibold">– {{ $pacient->nom }}</span>
+                <span class="text-gray-500 dark:text-gray-400">({{ $pacient->cognoms }})</span>
             </h2>
         </div>
 
@@ -17,6 +18,9 @@
         <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 @foreach([
+                    'Nom' => $pacient->nom,
+                    'Cognoms' => $pacient->cognoms,
+                    'Gènere' => $pacient->genere,
                     'Email' => $pacient->email,
                     'Data de naixement' => $pacient->data_naixement,
                     'Núm. Document' => $pacient->num_document,
@@ -25,7 +29,6 @@
                     'Ciutat' => $pacient->ciutat,
                     'Codi postal' => $pacient->codi_postal,
                     'Província' => $pacient->provincia,
-                    'País' => $pacient->pais,
                     'Mètode de contacte preferit' => $pacient->metode_contacte,
                     'Observacions' => $pacient->observacions,
                     'Al·lèrgies' => $pacient->alergies,

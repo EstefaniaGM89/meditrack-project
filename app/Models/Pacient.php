@@ -12,15 +12,15 @@ class Pacient extends Model
 
     protected $fillable = [
         'nom',
+        'cognoms',
+        'genere',
         'email',
-        'pass',
         'data_naixement',
         'telefon',
         'adreca',
         'ciutat',
         'codi_postal',
         'provincia',
-        'pais',
         'num_document',
         'metode_contacte',
         'observacions',
@@ -29,7 +29,7 @@ class Pacient extends Model
         'antecedents',
         'vacunes',
     ];
-    protected $hidden = ['pass'];
+    protected $hidden = [''];
 
     public function recordatoris()
     {

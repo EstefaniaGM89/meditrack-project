@@ -10,10 +10,10 @@
             <span>Benvingut/da a <span class="text-indigo-500 dark:text-indigo-300">MediTrack</span></span>
             <span class="inline-block text-3xl animate-wiggle">👋</span>
         </h2>
-
         <p class="mt-2 text-indigo-700 dark:text-indigo-300 font-semibold">
-            Sessió iniciada com: {{ Auth::user()->name }}
+            Sessió iniciada com: {{ ucwords(Auth::user()->name) }}
         </p>
+
     </div>
 
     <div class="grid 'sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

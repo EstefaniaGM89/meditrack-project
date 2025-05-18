@@ -49,7 +49,6 @@ class PacientController extends Controller
         $request->validate([
             'nom' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:pacients',
-            'pass' => 'required|string|min:4',
             'data_naixement' => 'required|date',
             'num_document' => 'nullable|string|unique:pacients',
             'telefon' => 'nullable|string|max:30',
@@ -57,7 +56,6 @@ class PacientController extends Controller
             'ciutat' => 'nullable|string|max:100',
             'codi_postal' => 'nullable|string|max:10',
             'provincia' => 'nullable|string|max:100',
-            'pais' => 'nullable|string|max:100',
             'observacions' => 'nullable|string',
             'alergies' => 'nullable|string',
             'medicaments' => 'nullable|string',
@@ -66,7 +64,6 @@ class PacientController extends Controller
             'metode_contacte' => 'nullable|string|max:100',
         ]);
 
-        $request['pass'] = Hash::make($request['pass']);
         Pacient::create($request->all());
 
         return redirect()->route('pacients.index')->with('success', 'Pacient creat correctament.');
@@ -88,16 +85,16 @@ class PacientController extends Controller
     {
         $request->validate([
             'nom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:pacients,email,' . $id,
-            'pass' => 'nullable|string|min:6',
+            'cognoms' => 'required|string|max:255',
+            'genere' => 'required|string|max:10',
+            'email' => 'required|email|max:255|unique:pacients,email,' . $id,
             'data_naixement' => 'required|date',
             'num_document' => 'nullable|string|unique:pacients,num_document,' . $id,
             'telefon' => 'nullable|string|max:30',
             'adreca' => 'nullable|string|max:255',
             'ciutat' => 'nullable|string|max:100',
-            'codi_postal' => 'nullable|string|max:10',
+            'codi_postal' => 'nullable|string|max:5',
             'provincia' => 'nullable|string|max:100',
-            'pais' => 'nullable|string|max:100',
             'observacions' => 'nullable|string',
             'alergies' => 'nullable|string',
             'medicaments' => 'nullable|string',
@@ -108,16 +105,13 @@ class PacientController extends Controller
 
         $pacient = Pacient::findOrFail($id);
 
-        if ($request->filled('pass')) {
-            $request['pass'] = Hash::make($request['pass']);
-        } else {
-            $request->request->remove('pass');
-        }
+        $data = $request->except('pass');
 
-        $pacient->update($request->all());
+        $pacient->update($data);
 
         return redirect()->route('pacients.index')->with('success', 'Pacient actualitzat correctament.');
     }
+
 
     public function destroy($id)
     {

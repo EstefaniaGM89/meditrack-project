@@ -34,16 +34,16 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             @foreach ([
                 'Nom' => 'nom',
+                'Cognoms' => 'cognoms',
+                'Gènere' => 'genere',
                 'Núm. Document' => 'num_document',
                 'Email' => 'email',
-                'Contrasenya' => 'pass',
                 'Data de naixement' => 'data_naixement',
                 'Telèfon' => 'telefon',
                 'Adreça' => 'adreca',
                 'Ciutat' => 'ciutat',
                 'Codi Postal' => 'codi_postal',
                 'Província' => 'provincia',
-                'País' => 'pais',
                 'Mètode de contacte' => 'metode_contacte'
             ] as $label => $name)
                 <div>
@@ -58,6 +58,14 @@
                                 </option>
                             @endforeach
                         </select>
+
+                    @elseif ($name === 'genere')
+                        <select name="genere" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
+                            <option value="">-- Selecciona gènere --</option>
+                            <option value="Home" @if(old('genere') == 'Home') selected @endif>Home</option>
+                            <option value="Dona" @if(old('genere') == 'Dona') selected @endif>Dona</option>
+                        </select>
+
                     @else
                         <input
                             type="{{ in_array($name, ['email']) ? 'email' : ($name === 'pass' ? 'password' : ($name === 'data_naixement' ? 'date' : 'text')) }}"

@@ -34,6 +34,7 @@
                 <tr>
                     <th class="px-3 py-2 text-left">ID</th>
                     <th class="px-3 py-2 text-left">Nom</th>
+                    <th class="px-3 py-2 text-left">Cognoms</th>
                     <th class="px-3 py-2 text-left">Email</th>
                     <th class="px-3 py-2 text-left">Núm. Document</th>
                     <th class="px-3 py-2 text-left">Telèfon</th>
@@ -47,6 +48,7 @@
                     <tr class="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
                         <td class="px-3 py-2">{{ $pacient->id }}</td>
                         <td class="px-3 py-2">{{ $pacient->nom }}</td>
+                        <td class="px-3 py-2">{{ $pacient->cognoms }}</td>
                         <td class="px-3 py-2">{{ $pacient->email }}</td>
                         <td class="px-3 py-2">{{ $pacient->num_document }}</td>
                         <td class="px-3 py-2">{{ $pacient->telefon }}</td>

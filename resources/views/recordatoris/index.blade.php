@@ -37,7 +37,7 @@
                     <th class="px-4 py-2 text-left">Pacient</th>
                     <th class="px-4 py-2 text-left">Medicaments</th>
                     <th class="px-4 py-2 text-left">Missatge</th>
-                    <th class="px-4 py-2 text-left">Hora</th>
+                    <th class="px-4 py-2 text-left">Data - Hora</th>
                     <th class="px-4 py-2 text-left">Estat</th>
                     <th class="px-4 py-2 text-center">Accions</th>
                 </tr>
