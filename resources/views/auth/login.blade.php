@@ -45,5 +45,10 @@
             Encara no tens compte? <a href="{{ route('register') }}" class="text-indigo-600 hover:underline">Registra't
                 aquí</a>
         </p>
+
+        {{-- Peu de pàgina legal --}}
+        <p class="mt-6 text-xs text-gray-500 dark:text-gray-400 text-center">
+            © 2025 MediTrack. Tots els drets reservats.
+        </p>
     </div>
 @endsection

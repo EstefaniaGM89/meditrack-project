@@ -19,13 +19,14 @@ class RecordatoriMedicament extends Notification
         $this->recordatori = $recordatori;
     }
 
-    // Solo usamos el canal de correo, eliminamos 'database'
+    // Utilitzat per enviar la notificació
+    // a través del canal de correu electrònic
     public function via($notifiable)
     {
-        return ['mail']; // Ya no se usará la base de datos
+        return ['mail'];
     }
 
-    // Si usas envío de correos, este es el contenido
+    // Contingut del correu electrònic
     public function toMail($notifiable)
     {
         return (new MailMessage)

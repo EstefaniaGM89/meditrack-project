@@ -59,5 +59,10 @@
         <p class="mt-4 text-sm text-gray-600 dark:text-gray-300 text-center">
             Ja tens compte? <a href="{{ route('login') }}" class="text-indigo-600 hover:underline">Inicia sessió</a>
         </p>
+
+        {{-- Peu de pàgina legal --}}
+        <p class="mt-6 text-xs text-gray-500 dark:text-gray-400 text-center">
+            © 2025 MediTrack. Tots els drets reservats.
+        </p>
     </div>
 @endsection

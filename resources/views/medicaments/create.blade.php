@@ -4,7 +4,7 @@
 @section('title', 'Crear Medicament')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-6 dark:text-white">Crear Medicament</h2>
+    <h2 class="text-2xl font-bold mb-6 dark:text-white">💊 Crear Medicament</h2>
 
     @if ($errors->any())
         <div class="bg-red-100 text-gray-700 dark:bg-gray-900 dark:text-gray-300 p-4 rounded mb-4">

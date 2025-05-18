@@ -48,7 +48,9 @@
                         <td class="px-4 py-2">{{ $recordatori->pacient->nom ?? '—' }}</td>
                         <td class="px-4 py-2">{{ $recordatori->medicament->nom ?? '—' }}</td>
                         <td class="px-4 py-2">{{ $recordatori->missatge }}</td>
-                        <td class="px-4 py-2">{{ $recordatori->hora }}</td>
+                        <td class="px-4 py-2">
+                            {{ \Carbon\Carbon::parse($recordatori->hora)->format('d/m/Y - H:i') }}
+                        </td>
                         <td class="px-4 py-2">{{ ucfirst($recordatori->estat) }}</td>
                         <td class="px-4 py-2">
                             <div class="flex justify-center gap-2">
@@ -73,6 +75,7 @@
                         </td>
                     </tr>
                 @endforelse
+
             </tbody>
         </table>
     </div>

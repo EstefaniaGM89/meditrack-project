@@ -1,4 +1,4 @@
-<!-- Vista per veure detalladament les dades d' un pacient -->
+<!-- Vista per veure detalladament les dades d'un pacient -->
 @extends('layouts.app')
 
 @section('title', 'Detalls del Pacient')
@@ -8,7 +8,7 @@
         <!-- Títol amb nom -->
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
-                Detalls del Pacient
+                👥 Pacient
                 <span class="text-indigo-600 dark:text-indigo-400 font-semibold">– {{ $pacient->nom }}</span>
             </h2>
         </div>
@@ -35,7 +35,13 @@
                 ] as $label => $value)
                     <div class="border-b border-gray-200 dark:border-gray-700 pb-3">
                         <h3 class="font-semibold text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">{{ $label }}</h3>
-                        <p class="text-base mt-1 break-words">{{ $value ?: '—' }}</p>
+                        <p class="text-base mt-1 break-words">
+                            @if ($label === 'Data de naixement' && $value)
+                                {{ \Carbon\Carbon::parse($value)->format('d/m/Y') }}
+                            @else
+                                {{ $value ?: '—' }}
+                            @endif
+                        </p>
                     </div>
                 @endforeach
             </div>

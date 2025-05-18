@@ -51,7 +51,9 @@
                         <td class="px-3 py-2">{{ $pacient->num_document }}</td>
                         <td class="px-3 py-2">{{ $pacient->telefon }}</td>
                         <td class="px-3 py-2">{{ $pacient->adreca }}</td>
-                        <td class="px-3 py-2">{{ $pacient->data_naixement }}</td>
+                        <td class="px-3 py-2">
+                            {{ \Carbon\Carbon::parse($pacient->data_naixement)->format('d/m/Y') }}
+                        </td>
                         <td class="px-3 py-2">
                             <div class="flex gap-2 justify-center">
                                 <a href="{{ route('pacients.show', $pacient->id) }}"
@@ -81,6 +83,7 @@
                         </td>
                     </tr>
                 @endforelse
+
             </tbody>
         </table>
     </div>

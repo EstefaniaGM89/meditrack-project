@@ -4,7 +4,7 @@
 @section('title', 'Editar Pacient')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">Editar Pacient</h2>
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">👥 Editar Pacient</h2>
 
     @if ($errors->any())
         <div class="bg-red-100 dark:bg-red-300 text-red-700 dark:text-red-900 p-4 rounded mb-4">
@@ -68,11 +68,72 @@
                 <input type="text" name="codi_postal" value="{{ old('codi_postal', $pacient->codi_postal) }}"
                     class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
-
             <div>
-                <label class="block font-semibold">Província</label>
-                <input type="text" name="provincia" value="{{ old('provincia', $pacient->provincia) }}"
-                    class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
+                <label class="block font-semibold text-gray-700 dark:text-gray-300">Província</label>
+                <select name="provincia" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
+                    @php
+                        $provincies = [
+                            'Álava',
+                            'Albacete',
+                            'Alicante',
+                            'Almería',
+                            'Asturias',
+                            'Ávila',
+                            'Badajoz',
+                            'Barcelona',
+                            'Burgos',
+                            'Cáceres',
+                            'Cádiz',
+                            'Cantabria',
+                            'Castellón',
+                            'Ciudad Real',
+                            'Córdoba',
+                            'Cuenca',
+                            'Girona',
+                            'Granada',
+                            'Guadalajara',
+                            'Guipúzcoa',
+                            'Huelva',
+                            'Huesca',
+                            'Illes Balears',
+                            'Jaén',
+                            'La Coruña',
+                            'La Rioja',
+                            'Las Palmas',
+                            'León',
+                            'Lleida',
+                            'Lugo',
+                            'Madrid',
+                            'Málaga',
+                            'Murcia',
+                            'Navarra',
+                            'Ourense',
+                            'Palencia',
+                            'Pontevedra',
+                            'Salamanca',
+                            'Santa Cruz de Tenerife',
+                            'Segovia',
+                            'Sevilla',
+                            'Soria',
+                            'Tarragona',
+                            'Teruel',
+                            'Toledo',
+                            'Valencia',
+                            'Valladolid',
+                            'Vizcaya',
+                            'Zamora',
+                            'Zaragoza'
+                        ];
+                        $provinciaSeleccionada = old('provincia', $pacient->provincia ?? '');
+                    @endphp
+
+                    <option value="">-- Selecciona una província --</option>
+                    @foreach ($provincies as $provincia)
+                        <option value="{{ $provincia }}" @if($provincia == $provinciaSeleccionada) selected @endif>
+                            {{ $provincia }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div>

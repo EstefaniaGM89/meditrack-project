@@ -4,7 +4,7 @@
 @section('title', 'Editar Personal Sanitari')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-6">Editar Personal Sanitari</h2>
+    <h2 class="text-2xl font-bold mb-6">👩‍⚕️ Editar Personal Sanitari</h2>
 
     @if ($errors->any())
         <div class="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 p-4 rounded mb-4">

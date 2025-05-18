@@ -4,7 +4,7 @@
 @section('title', 'Editar Recordatori')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-6">✏️ Editar Recordatori</h2>
+    <h2 class="text-2xl font-bold mb-6">⏰ Editar Recordatori</h2>
 
     @if ($errors->any())
         <div class="bg-red-100 text-red-500 dark:bg-red-200 dark:text-red-900 p-4 rounded mb-4">
