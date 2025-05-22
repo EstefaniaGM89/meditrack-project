@@ -70,7 +70,7 @@ class MedicamentController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'nom' => 'required|string|max:25',
+            'nom.required' => 'required|string|max:25',
             'dosi' => 'required|string|max:10',
             'descripcio' => 'nullable|string',
         ], [
