@@ -1,3 +1,5 @@
+{{-- Components --}}
+
 {{-- Screen amb logo i animació --}}
 <div id="splash" class="splash-screen">
     <img src="{{ asset('images/meditrack-logo.png') }}" alt="MediTrack" class="splash-logo">

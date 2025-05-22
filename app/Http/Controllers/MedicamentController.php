@@ -46,20 +46,19 @@ class MedicamentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'dosi' => 'required|string|max:50',
+            'nom' => 'required|string|max:25',
+            'dosi' => 'required|string|max:10',
             'descripcio' => 'nullable|string',
+        ], [
+            'nom.required' => 'El nom del medicament és obligatori.',
+            'nom.max' => 'El nom no pot tenir més de 25 caràcters.',
+            'dosi.required' => 'La dosi és obligatòria.',
+            'dosi.max' => 'La dosi no pot tenir més de 10 caràcters.',
         ]);
 
         Medicament::create($validated);
 
         return redirect()->route('medicaments.index')->with('success', 'Medicament creat correctament.');
-    }
-
-    public function show($id)
-    {
-        $medicament = Medicament::findOrFail($id);
-        return view('medicaments.show', compact('medicament'));
     }
 
     public function edit($id)
@@ -71,9 +70,14 @@ class MedicamentController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'dosi' => 'required|string|max:50',
+            'nom' => 'required|string|max:25',
+            'dosi' => 'required|string|max:10',
             'descripcio' => 'nullable|string',
+        ], [
+            'nom.required' => 'El nom del medicament és obligatori.',
+            'nom.max' => 'El nom no pot tenir més de 25 caràcters.',
+            'dosi.required' => 'La dosi és obligatòria.',
+            'dosi.max' => 'La dosi no pot tenir més de 10 caràcters.',
         ]);
 
         $medicament = Medicament::findOrFail($id);
@@ -81,6 +85,7 @@ class MedicamentController extends Controller
 
         return redirect()->route('medicaments.index')->with('success', 'Medicament actualitzat correctament.');
     }
+
 
     public function destroy($id)
     {

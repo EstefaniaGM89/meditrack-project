@@ -12,14 +12,6 @@ Esta aplicación permite:
 ⦁	// Preparado para implementar pero no en uso: Registrar datos de salud del paciente (tensión arterial, pulso, etc.).
 ⦁	Gestionar el personal sanitario autorizado para acceder a la plataforma.
 
-**Requisitos del sistema**
-
-⦁	PHP 8.2 o superior
-⦁	Composer
-⦁	Node.js y npm
-⦁	MySQL
-⦁	Navegador web
-
 Instalación
 
 1. Clonar el repositorio o descargar el proyecto.
@@ -39,6 +31,14 @@ Instalación
     npm run dev
 
 Acceder a la aplicación desde el navegador en: http://127.0.0.1:8000/
+
+**Requisitos del sistema**
+
+⦁	PHP 8.2 o superior
+⦁	Composer
+⦁	Node.js y npm
+⦁	MySQL
+⦁	Navegador web
 
 **Estructura del proyecto**
 

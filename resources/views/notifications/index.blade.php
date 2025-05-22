@@ -10,7 +10,7 @@
             No tens notificacions pendents.
         </div>
     @else
-        {{-- Botón para marcar todas como leídas --}}
+        {{-- Botó per marcar totes les notificacions com a llegides --}}
         <form method="POST" action="{{ route('notificacions.read-all') }}" class="mb-4">
             @csrf
             <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
@@ -18,7 +18,7 @@
             </button>
         </form>
 
-        {{-- Listado de notificaciones --}}
+        {{-- Listat de notificacions --}}
         <ul class="space-y-4">
             @foreach($notificacions as $notificacio)
                 <li class="bg-white shadow rounded p-4 flex justify-between items-start">

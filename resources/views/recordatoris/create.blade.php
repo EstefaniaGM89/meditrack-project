@@ -6,22 +6,14 @@
 @section('content')
     <h2 class="text-2xl font-bold mb-6">⏰ Crear Recordatori</h2>
 
-    @if ($errors->any())
-        <div class="bg-red-100 text-red-500 dark:bg-red-200 dark:text-red-900 p-4 rounded mb-4">
-            <ul class="list-disc pl-5">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <x-alert-errors />
 
     <form action="{{ route('recordatoris.store') }}" method="POST" class="space-y-4 max-w-xl">
         @csrf
 
         <div>
             <label class="block font-semibold">Pacient</label>
-            <select name="pacient_id" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
+            <select name="pacient_id" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
                 <option value="">-- Selecciona un pacient --</option>
                 @foreach($pacients as $pacient)
                     <option value="{{ $pacient->id }}">{{ $pacient->nom }} {{ $pacient->cognoms }}</option>
@@ -31,7 +23,7 @@
 
         <div>
             <label class="block font-semibold">Medicament</label>
-            <select name="medicament_id" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
+            <select name="medicament_id" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
                 <option value="">-- Selecciona un medicament --</option>
                 @foreach($medicaments as $medicament)
                     <option value="{{ $medicament->id }}">{{ $medicament->nom }} {{ $medicament->dosi}}</option>
@@ -41,13 +33,13 @@
 
         <div>
             <label class="block font-semibold">Missatge</label>
-            <input type="text" name="missatge" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
+            <input type="text" name="missatge" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label class="block font-semibold">Data d'inici</label>
-                <input type="date" name="inici" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
+                <input type="date" name="inici" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
             </div>
 
             <div>
@@ -83,8 +75,8 @@
                 💾 Guardar
             </button>
 
-            <a href="{{ route('pacients.index') }}"
-                class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-green-600 text-white px-4 py-2 rounded font-semibold">
+            <a href="{{ route('recordatoris.index') }}"
+                class="bg-gray-400 hover:bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
                 Cancel·lar
             </a>
         </div>

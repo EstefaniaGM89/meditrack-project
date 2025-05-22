@@ -26,7 +26,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard'); // ✅ redirección segura
+            return redirect()->route('dashboard'); // Redirigeix a la ruta del dashboard
         }
 
         return back()->withErrors([

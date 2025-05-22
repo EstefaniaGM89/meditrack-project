@@ -36,5 +36,5 @@ class RecordatoriMedicament extends Notification
             ->line("Hora programada: {$this->recordatori->data_hora}")
             ->line('Cuida’t!');
     }
-    // public function toArray($notifiable)
+    //  Això funciona desde terminal però no desde la web i no em convenç
 }

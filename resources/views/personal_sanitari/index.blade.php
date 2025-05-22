@@ -10,7 +10,7 @@
         ➕ Nou Profesional
     </a>
 
-    <!-- 🔍 Barra de cerca + ordenació -->
+    <!-- Barra de cerca + ordenació -->
     <form method="GET" action="{{ route('personal-sanitari.index') }}"
         class="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
         <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom, cognom, o rol..."

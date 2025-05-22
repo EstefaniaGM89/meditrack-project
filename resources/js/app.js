@@ -1,8 +1,12 @@
+// Llibreries
+import 'flowbite';
+import './bootstrap';
+
 // Aplicar tema abans (per evitar flash de color)
 const html = document.documentElement;
 const isAuthPage = document.body.dataset.auth === "true";
 
-// Aplica mode dinàmic (dark o light) si no estem a la pàgina d'autenticació
+// Aplica mode dinàmic (dark o light) si no estem a auth
 if (!isAuthPage) {
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -12,14 +16,10 @@ if (!isAuthPage) {
     }
 }
 
-// Llibreries
-import 'flowbite';
-import './bootstrap';
-import Chart from 'chart.js/auto';
-
-// Interacció després de carregar la pàgina
+// Interacció amb el DOM
+// El document ha de ser carregat abans d'executar el codi
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     const checkbox = document.getElementById("checkbox");
 
     // Pantalla de benvinguda
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    // Iniciar estat del toggle (només si hi ha toggle present i no estem a auth)
+    // Iniciar estat del toggle (si hi ha i no estem a auth)
     if (checkbox && !isAuthPage) {
         checkbox.checked = html.classList.contains("dark");
 
@@ -42,25 +42,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Notificacions (quan s'implementin aquestes)
+    // Tancar notificació d'èxit automàticament
     const notification = document.getElementById('toastSuccess');
     if (notification) {
         setTimeout(() => {
             notification.style.opacity = '0';
-            setTimeout(() => {
-                notification.remove();
-            }, 500);
+            setTimeout(() => notification.remove(), 500);
         }, 5000);
     }
 
-    // Enviar formulari automàticament si s'esborra el filtre de cerca
-    const searchInput = document.querySelector('input[name="search"]');
-    if (searchInput) {
-        const form = searchInput.closest('form');
-        searchInput.addEventListener('input', () => {
-            if (searchInput.value === '') {
-                form.submit();
-            }
+    // Tancar errors de validació automàticament
+    const errorAlert = document.getElementById('alertaErrors');
+    if (errorAlert) {
+        setTimeout(() => {
+            errorAlert.style.opacity = '0';
+            setTimeout(() => errorAlert.remove(), 500);
+        }, 5000);
+    }
+
+    // Enviar formulari si s'esborra la cerca
+    document.querySelector('input[name="search"]')?.addEventListener('input', function () {
+        if (this.value === '') {
+            this.form?.submit();
+        }
+    });
+
+        // Tancar alerta d'errors fent clic
+    const btnTancar = document.getElementById('btnTancarAlerta');
+    const alerta = document.getElementById('alertaErrors');
+    if (btnTancar && alerta) {
+        btnTancar.addEventListener('click', () => {
+            alerta.remove();
         });
     }
+
 });

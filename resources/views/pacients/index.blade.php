@@ -10,7 +10,7 @@
         ➕ Nou Pacient
     </a>
 
-    <!-- 🔍 Barra de cerca + ordenació -->
+    <!-- Barra de cerca + ordenació -->
     <form method="GET" action="{{ route('pacients.index') }}" class="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
         <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom o cognoms..."
             class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500">
@@ -89,7 +89,7 @@
         </table>
     </div>
 
-    <!-- 🔄 Paginació amb persistència de filtres -->
+    <!-- Paginació amb persistència de filtres -->
     <div class="mt-4">
         {{ $pacients->appends(request()->only(['search', 'sort']))->links() }}
     </div>

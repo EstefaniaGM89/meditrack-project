@@ -29,7 +29,7 @@ class Pacient extends Model
         'antecedents',
         'vacunes',
     ];
-    protected $hidden = [''];
+    protected $hidden = [];
 
     public function recordatoris()
     {

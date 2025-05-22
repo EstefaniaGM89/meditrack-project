@@ -9,8 +9,7 @@
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
                 👥 Pacient
-                <span class="text-indigo-600 dark:text-indigo-400 font-semibold">– {{ $pacient->nom }}</span>
-                <span class="text-gray-500 dark:text-gray-400">({{ $pacient->cognoms }})</span>
+                <span class="text-indigo-600 dark:text-indigo-400 font-semibold">– {{ $pacient->nom }} {{ $pacient->cognoms }}</span>
             </h2>
         </div>
 
@@ -53,12 +52,12 @@
         <!-- Botons -->
         <div class="mt-6 flex flex-wrap justify-end gap-3">
             <a href="{{ route('pacients.index') }}"
-               class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-green-500 text-white px-5 py-2 rounded font-medium flex items-center gap-2">
+               class="bg-gray-400 hover:bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-500 text-white px-5 py-2 rounded font-semibold flex items-center gap-2">
                 ← Tornar
             </a>
 
             <a href="{{ route('pacients.edit', $pacient->id) }}"
-               class="bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded font-medium flex items-center gap-2">
+               class="bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded font-semibold flex items-center gap-2">
                 ✏️ Editar
             </a>
 
@@ -67,7 +66,7 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit"
-                        class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded font-medium flex items-center gap-2">
+                        class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded font-semibold flex items-center gap-2">
                     🗑️ Eliminar
                 </button>
             </form>

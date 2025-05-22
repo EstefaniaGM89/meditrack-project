@@ -6,15 +6,7 @@
 @section('content')
     <h2 class="text-2xl font-bold mb-6">👩‍⚕️ Editar Personal Sanitari</h2>
 
-    @if ($errors->any())
-        <div class="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 p-4 rounded mb-4">
-            <ul class="list-disc pl-5">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <x-alert-errors />
 
     <form action="{{ route('personal-sanitari.update', parameters: $persona->id) }}" method="POST"
         class="space-y-4 max-w-md">
@@ -24,7 +16,7 @@
         <div>
             <label class="block font-semibold">Nom</label>
             <input type="text" name="nom" value="{{ old('nom', $persona->nom) }}"
-                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
         </div>
 
         <div>
@@ -35,7 +27,7 @@
         <div>
             <label class="block font-semibold">Email</label>
             <input type="email" name="email" value="{{ old('email', $persona->email) }}"
-                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
+                class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white">
         </div>
 
         <div>
@@ -53,10 +45,11 @@
             <label class="block font-semibold">Torn</label>
             <select name="torn" class="w-full p-2 border rounded dark:bg-gray-800 dark:text-white" required>
                 <option value="">-- Selecciona un torn --</option>
-                <option value="dia" @selected(old('torn') == 'dia')>Dia</option>
-                <option value="nit" @selected(old('torn') == 'nit')>Nit</option>
-                <option value="nit" @selected(old('torn') == 'nit')>Irrellevant</option>
+                <option value="dia" {{ $persona->torn === 'dia' ? 'selected' : '' }}>Dia</option>
+                <option value="nit" {{ $persona->torn === 'nit' ? 'selected' : '' }}>Nit</option>
+                <option value="irrellevant" {{ $persona->torn === 'irrellevant' ? 'selected' : '' }}>Irrellevant</option>
             </select>
+
         </div>
 
         <div class="flex gap-3 mt-6">
@@ -64,8 +57,8 @@
                 💾 Guardar
             </button>
 
-            <a href="{{ route('pacients.index') }}"
-                class="bg-gray-300 hover:bg-green-500 dark:bg-gray-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
+            <a href="{{ route('personal-sanitari.index') }}"
+                class="bg-gray-400 hover:bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-500 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold">
                 Cancel·lar
             </a>
         </div>

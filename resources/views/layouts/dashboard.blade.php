@@ -56,7 +56,7 @@
         <!-- Últim pacient -->
         <div
             class="p-6 rounded-2xl shadow-md border border-purple-100 bg-purple-50 hover:shadow-lg transition hover:scale-[1.02] duration-300">
-            <h3 class="text-lg font-semibold text-purple-800 mb-3">📌 Últim pacient registrat</h3>
+            <h3 class="text-lg font-semibold text-indigo-800 mb-3">📌 Últim pacient registrat</h3>
             @if ($lastPacient)
                 <p class="text-gray-700">👤 <strong>{{ $lastPacient->nom }} {{ $lastPacient->cognoms }}</strong></p>
                 <p class="text-gray-700">📧 {{ $lastPacient->email }}</p>

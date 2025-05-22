@@ -11,17 +11,17 @@ class PersonalSanitariController extends Controller
     {
         $query = PersonalSanitari::query();
 
-        // 🔍 Filtrar per nom, cognoms o rol
+        // Filtrar per nom, cognoms o rol
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('nom', 'like', "%$search%")
-                  ->orWhere('cognoms', 'like', "%$search%")
-                  ->orWhere('rol', 'like', "%$search%");
+                    ->orWhere('cognoms', 'like', "%$search%")
+                    ->orWhere('rol', 'like', "%$search%");
             });
         }
 
-        // 🔃 Ordenació
+        // Ordenació
         $sort = $request->get('sort', 'recent');
 
         switch ($sort) {
@@ -53,12 +53,25 @@ class PersonalSanitariController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom' => 'required|string|max:255',
-            'cognoms' => 'required|string|max:255',
+            'nom' => 'required|string|max:10',
+            'cognoms' => 'required|string|max:20',
             'email' => 'required|email|unique:personal_sanitari',
-            'rol' => 'nullable|string|max:50',
+            'rol' => 'required|string|max:10',
             'torn' => 'required|in:dia,nit,irrellevant',
             'password' => 'required|string|min:4',
+        ], [
+            'nom.required' => 'El nom és obligatori.',
+            'nom.max' => 'El nom no pot tenir més de 10 caràcters.',
+            'cognoms.required' => 'Els cognoms són obligatoris.',
+            'cognoms.max' => 'Els cognoms no poden tenir més de 20 caràcters.',
+            'email.required' => 'L\'email és obligatori.',
+            'email.email' => 'L\'email no és vàlid.',
+            'email.unique' => 'Aquest email ja està en ús.',
+            'rol.max' => 'El rol no pot tenir més de 10 caràcters.',
+            'rol.required' => 'El rol és obligatori.',
+            'torn.required' => 'Selecciona un torn.',
+            'password.required' => 'La contrasenya és obligatòria.',
+            'password.min' => 'La contrasenya ha de tenir almenys 4 caràcters.',
         ]);
 
         $data = $request->all();
@@ -76,13 +89,32 @@ class PersonalSanitariController extends Controller
 
     public function update(Request $request, PersonalSanitari $personal_sanitari)
     {
-        $request->validate([
-            'nom' => 'required|string|max:255',
-            'cognoms' => 'required|string|max:255',
+        $rules = [
+            'nom' => 'required|string|max:10',
+            'cognoms' => 'required|string|max:20',
             'email' => 'required|email|unique:personal_sanitari,email,' . $personal_sanitari->id,
-            'rol' => 'required|string|max:50',
+            'rol' => 'required|string|max:10',
             'torn' => 'required|in:dia,nit,irrellevant',
-            'password' => 'nullable|string|min:4',
+        ];
+
+        // Si se quiere cambiar la contraseña, la validamos
+        if ($request->filled('password')) {
+            $rules['password'] = 'string|min:4';
+        }
+
+        $validated = $request->validate($rules, [
+            'nom.required' => 'El nom és obligatori.',
+            'nom.max' => 'El nom no pot tenir més de 10 caràcters.',
+            'cognoms.required' => 'Els cognoms són obligatoris.',
+            'cognoms.max' => 'Els cognoms no poden tenir més de 20 caràcters.',
+            'email.required' => 'L\'email és obligatori.',
+            'email.email' => 'L\'email no és vàlid.',
+            'email.unique' => 'Aquest correu electrònic ja està registrat.',
+            'rol.required' => 'El rol és obligatori.',
+            'rol.max' => 'El rol no pot tenir més de 10 caràcters.',
+            'torn.required' => 'Selecciona un torn.',
+            'torn.in' => 'El torn seleccionat no és vàlid.',
+            'password.min' => 'La contrasenya ha de tenir almenys 4 caràcters.',
         ]);
 
         $data = $request->only(['nom', 'cognoms', 'email', 'rol', 'torn']);

@@ -11,7 +11,7 @@
         ➕ Nou Recordatori
     </a>
 
-    <!-- 🔍 Barra de cerca + ordenació -->
+    <!-- Barra de cerca + ordenació -->
     <form method="GET" action="{{ route('recordatoris.index') }}"
         class="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
         <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom o cognoms..."
@@ -86,7 +86,7 @@
         </table>
     </div>
 
-    <!-- Opcional: paginació -->
+    <!-- Paginació -->
     <div class="mt-4">
         {{ $recordatoris->appends(['search' => request('search')])->links() }}
     </div>
