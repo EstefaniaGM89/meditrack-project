@@ -16,15 +16,13 @@ class Recordatori extends Model
         'inici',
         'fi',
         'data_hora',
-        'hora',
         'dies_setmana',
         'estat',
     ];
 
     protected $casts = [
         'dies_setmana' => 'array',
-        'data_hora' => 'datetime',
-        'hora' => 'datetime:H:i',
+
     ];
 
     public function pacient()
