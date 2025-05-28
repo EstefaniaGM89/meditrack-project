@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Llibreries externes */
+@import 'flowbite';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Botó rodó de llum i oscuritat animat */
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(24px);
+}
+
+/* Restaurar comportament per defecte de l'input checkbox */
+input[type="checkbox"] {
+  appearance: auto !important;
+  -webkit-appearance: checkbox !important;
+  -moz-appearance: checkbox !important;
+}
+
+/* Mida de font global equilibrada */
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1536px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+.animate-fade-in {
+  animation: fade-in 1.5s ease-in-out;
+}
+
+/* Animació de cor bategant per logos */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); }
+}
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* Splash screen reutilitzant Tailwind */
+@layer components {
+  .splash-screen {
+    @apply fixed inset-0 z-50 flex flex-col items-center justify-center bg-white dark:bg-gray-900 transition-opacity duration-1000;
+  }
+
+  .splash-logo {
+    @apply h-24 mb-4 animate-pulse;
+  }
+
+  .splash-text {
+    @apply text-indigo-600 dark:text-indigo-300 font-semibold text-lg animate-fade-in;
+  }
+}
+
+/* Botó guardar */
+@layer components {
+  .btn-guardar {
+    @apply bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded flex items-center gap-2 font-semibold;
+  }
+
+  .select-filtro {
+    @apply bg-white dark:bg-gray-800 text-black dark:text-white border border-gray-300 dark:border-gray-600 rounded-md p-2;
+  }
+}
+
+@layer utilities {
+    .animate-fade-in {
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
