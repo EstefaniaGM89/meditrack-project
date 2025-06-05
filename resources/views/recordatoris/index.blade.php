@@ -4,6 +4,12 @@
 @section('title', 'Recordatoris')
 
 @section('content')
+
+    <!-- Menú per a mòbil -->
+    <div class="grid grid-cols-2 gap-4 mt-2 mb-6 md:hidden">
+        @include('components.menu-mobil')
+    </div>
+
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">⏰ Recordatoris</h2>
 
     <a href="{{ route('recordatoris.create') }}"

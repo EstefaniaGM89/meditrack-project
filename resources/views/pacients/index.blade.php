@@ -3,6 +3,10 @@
 @section('title', 'Pacients')
 
 @section('content')
+    <div class="grid grid-cols-2 gap-4 mt-2 mb-6 md:hidden">
+        @include('components.menu-mobil')
+    </div>
+
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">👥 Pacients</h2>
 
     <a href="{{ route('pacients.create') }}"
@@ -10,14 +14,11 @@
         ➕ Nou Pacient
     </a>
 
-    <!-- Barra de cerca + ordenació -->
     <form method="GET" action="{{ route('pacients.index') }}" class="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
         <input type="text" name="search" value="{{ request('search') }}" placeholder="Filtrar per nom o cognoms..."
             class="w-full sm:w-64 p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-gray-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500">
         <button type="submit"
-            class="px-4 py-2 bg-indigo-500 dark:bg-indigo-600 text-white rounded hover:bg-indigo-600 dark:hover:bg-indigo-500 transition">
-            🔍
-        </button>
+            class="px-4 py-2 bg-indigo-500 dark:bg-indigo-600 text-white rounded hover:bg-indigo-600 dark:hover:bg-indigo-500 transition">🔍</button>
         <select name="sort" onchange="this.form.submit()" class="select-filtro">
             <option value="recent" {{ request('sort') == 'recent' ? 'selected' : '' }}>📅 Més recents</option>
             <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>📅 Més antics</option>
@@ -26,19 +27,18 @@
         </select>
     </form>
 
-    <div class="overflow-x-auto">
-        <table
-            class="min-w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow text-sm text-gray-800 dark:text-gray-100">
+    <div class="overflow-x-auto pb-16">
+        <table class="min-w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow text-sm text-gray-800 dark:text-gray-100">
             <thead class="bg-indigo-300 dark:bg-indigo-600">
                 <tr>
-                    <th class="px-3 py-2 text-left">ID</th>
-                    <th class="px-3 py-2 text-left">Nom</th>
-                    <th class="px-3 py-2 text-left">Cognoms</th>
-                    <th class="px-3 py-2 text-left">Email</th>
-                    <th class="px-3 py-2 text-left">Núm. Document</th>
-                    <th class="px-3 py-2 text-left">Telèfon</th>
-                    <th class="px-3 py-2 text-left">Adreça</th>
-                    <th class="px-3 py-2 text-left">Data Naixement</th>
+                    <th class="px-3 py-2">ID</th>
+                    <th class="px-3 py-2">Nom</th>
+                    <th class="px-3 py-2">Cognoms</th>
+                    <th class="px-3 py-2">Email</th>
+                    <th class="px-3 py-2">Núm. Document</th>
+                    <th class="px-3 py-2">Telèfon</th>
+                    <th class="px-3 py-2">Adreça</th>
+                    <th class="px-3 py-2">Data Naixement</th>
                     <th class="px-3 py-2 text-center">Accions</th>
                 </tr>
             </thead>
@@ -52,44 +52,30 @@
                         <td class="px-3 py-2">{{ $pacient->num_document }}</td>
                         <td class="px-3 py-2">{{ $pacient->telefon }}</td>
                         <td class="px-3 py-2">{{ $pacient->adreca }}</td>
-                        <td class="px-3 py-2">
-                            {{ \Carbon\Carbon::parse($pacient->data_naixement)->format('d/m/Y') }}
-                        </td>
+                        <td class="px-3 py-2">{{ \Carbon\Carbon::parse($pacient->data_naixement)->format('d/m/Y') }}</td>
                         <td class="px-3 py-2">
                             <div class="flex gap-2 justify-center">
                                 <a href="{{ route('pacients.show', $pacient->id) }}"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
-                                    title="Veure">👁️</a>
-
+                                    class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs">👁️</a>
                                 <a href="{{ route('pacients.edit', $pacient->id) }}"
-                                    class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
-                                    title="Editar">✏️</a>
-
+                                    class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded text-xs">✏️</a>
                                 <form action="{{ route('pacients.destroy', $pacient->id) }}" method="POST"
-                                    onsubmit="return confirm('Estàs segur que vols eliminar aquest pacient?')"
-                                    class="flex items-center justify-center">
+                                    onsubmit="return confirm('Estàs segur que vols eliminar aquest pacient?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold flex items-center justify-center"
-                                        title="Eliminar">🗑️</button>
+                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs">🗑️</button>
                                 </form>
                             </div>
                         </td>
                     </tr>
                 @empty
-                    <tr>
-                        <td colspan="8" class="px-4 py-2 text-center text-gray-500 dark:text-gray-400">
-                            No hi ha pacients registrats.
-                        </td>
-                    </tr>
+                    <tr><td colspan="9" class="text-center py-4 text-gray-500 dark:text-gray-400">No hi ha pacients registrats.</td></tr>
                 @endforelse
-
             </tbody>
         </table>
     </div>
 
-    <!-- Paginació amb persistència de filtres -->
     <div class="mt-4">
         {{ $pacients->appends(request()->only(['search', 'sort']))->links() }}
     </div>

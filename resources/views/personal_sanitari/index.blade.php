@@ -3,6 +3,12 @@
 @section('title', 'Personal Sanitari')
 
 @section('content')
+
+    <!-- Menú per a mòbil -->
+    <div class="grid grid-cols-2 gap-4 mt-2 mb-6 md:hidden">
+        @include('components.menu-mobil')
+    </div>
+
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">👩‍⚕️ Personal Sanitari</h2>
 
     <a href="{{ route('personal-sanitari.create') }}"
